@@ -26,14 +26,12 @@ menu:
 comments: false
 ---
 
-- GitHub Action for Deploying by WebDAV 
+- [GitHub Action for Deploying by WebDAV](https://github.com/XPH0816/webdav-deploy-action) 
 
-- Algorithm Presentation Slides (Slidev)
+- [Algorithm Presentation Slides (Slidev)](https://github.com/XPH0816/algo-presentation)
 
-- Library Management System
+- [Library Management System](https://github.com/XPH0816/Library-management-system)
 
-- Creating a Function Image
+- [Creating a Function Image](https://github.com/XPH0816/Creating-function-image-tools)
 
-- Link in the footer
-
-[GitHub](https://github.com/XPH0816?tab=repositories)
+[More on My GitHub Repo](https://github.com/XPH0816?tab=repositories)
