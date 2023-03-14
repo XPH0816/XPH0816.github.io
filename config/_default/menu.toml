@@ -22,3 +22,11 @@ url = "https://www.linkedin.com/in/shi-song-lim-836b551a4/"
 
 [social.params]
 icon = "brand-linkedin"
+
+[[social]]
+identifier = "wechat"
+name = "WeChat"
+url = "img/qrcode.png"
+
+[social.params]
+icon = "brand-wechat"
