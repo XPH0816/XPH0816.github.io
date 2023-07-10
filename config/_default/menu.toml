@@ -26,7 +26,7 @@ icon = "brand-linkedin"
 [[social]]
 identifier = "wechat"
 name = "WeChat"
-url = "img/qrcode.png"
+url = "/img/qrcode.png"
 
 [social.params]
 icon = "brand-wechat"
