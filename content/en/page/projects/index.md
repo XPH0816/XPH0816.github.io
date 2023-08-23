@@ -5,6 +5,10 @@ links:
     description: GitHub Action for deploying to WebDAV server.
     website: https://github.com/XPH0816/webdav-deploy-action
     image: /icons/upload.svg
+  - title: Music Player (CLI)
+    description: A Music Player written in C for better Data Structure Understanding.
+    website: https://github.com/XPH0816/DSA-Project
+    image: /icons/netease-music.svg
   - title: Algorithm Presentation Slides (Slidev)
     description: Presentation slides for school algorithms course.
     website: https://github.com/XPH0816/algo-presentation
@@ -27,6 +31,8 @@ comments: false
 ---
 
 - [GitHub Action for Deploying by WebDAV](https://github.com/XPH0816/webdav-deploy-action) 
+
+- [Music Player (CLI)](https://github.com/XPH0816/DSA-Project)
 
 - [Algorithm Presentation Slides (Slidev)](https://github.com/XPH0816/algo-presentation)
 
