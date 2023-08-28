@@ -3,7 +3,7 @@ title: Event Loop
 description: An Event Loop on the browser and JavaScript Language
 slug: event-loop
 date: 2023-08-19 00:00:00+0800
-image: https://wd.imgix.net/image/T4FyVKpzu4WKF1kBNvXepbi08t52/BG4tvT7y95iPAelkeadP.png?auto=format&w=964
+image: https://developer.chrome.com/static/blog/inside-browser-part1/image/browser-architecture-9d143004c2a63_856.png
 categories:
     - Frontend Development
 tags:
@@ -49,7 +49,7 @@ The Most important processes are:
     - By default, the browser will open a new renderer process for each tab to ensure that different tabs do not affect each other.
     > This default mode may change in the future. Interested students can refer to the [chrome official documentation](https://chromium.googlesource.com/chromium/src/+/main/docs/process_model_and_site_isolation.md#Modes-and-Availability)
 
-![Process and What it controls](https://wd.imgix.net/image/T4FyVKpzu4WKF1kBNvXepbi08t52/vl5sRzL8pFwlLSN7WW12.png?auto=format&w=964)
+![Process and What it controls](https://developer.chrome.com/static/blog/inside-browser-part1/image/chrome-processes-79aaecca78d23_856.png)
 
 ---
 

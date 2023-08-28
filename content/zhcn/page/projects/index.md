@@ -17,6 +17,14 @@ links:
     description: 一个使用 Python (Tkinter) + MySQL 制作的图书馆管理系统
     website: https://github.com/XPH0816/Library-management-system
     image: /icons/clipboard-list.svg
+  - title: 图书馆房间预订系统
+    description: 一个使用 Tauri + SvelteKit 制作的图书馆房间预订系统
+    website: https://github.com/XPH0816/LibraryRoomBookingSystem
+    image: /icons/door.svg
+  - title: 捷运服务反馈系统
+    description: 一个使用 Laravel + Vue.js + Inertia.js 制作的捷运服务反馈系统
+    website: https://github.com/XPH0816/railwayfeedbacksystem
+    image: /icons/train.svg
   - title: 制作函数图像工具
     description: 一个使用 Python 制作的函数图像工具
     website: https://github.com/XPH0816/Creating-function-image-tools
@@ -37,6 +45,10 @@ comments: false
 - [算法演示幻灯片 (Slidev)](https://github.com/XPH0816/algo-presentation)
 
 - [图书馆管理系统](https://github.com/XPH0816/Library-management-system)
+
+- [图书馆房间预订系统](https://github.com/XPH0816/LibraryRoomBookingSystem)
+
+- [捷运服务反馈系统](https://github.com/XPH0816/railwayfeedbacksystem)
 
 - [制作函数图像工具](https://github.com/XPH0816/Creating-function-image-tools)
 

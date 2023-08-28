@@ -3,7 +3,7 @@ title: 事件循环
 description: 在浏览器以及JS中，事件循环是如何工作的？
 slug: 事件循环
 date: 2023-08-19 00:00:00+0800
-image: https://wd.imgix.net/image/T4FyVKpzu4WKF1kBNvXepbi08t52/BG4tvT7y95iPAelkeadP.png?auto=format&w=964
+image: https://developer.chrome.com/static/blog/inside-browser-part1/image/browser-architecture-9d143004c2a63_856.png
 categories:
     - 前端开发
 tags:
