@@ -1,0 +1,496 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="A Knowledge Sharing about Data Structures and Algorithms in C Language for CLI Music Player"><title>C Music Player</title><link rel=canonical href=https://xph0816.github.io/p/c-music-player/><link rel=stylesheet href=/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css><meta property="og:title" content="C Music Player"><meta property="og:description" content="A Knowledge Sharing about Data Structures and Algorithms in C Language for CLI Music Player"><meta property="og:url" content="https://xph0816.github.io/p/c-music-player/"><meta property="og:site_name" content="Song's Blog"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="C"><meta property="article:tag" content="Data Structure"><meta property="article:tag" content="Double Linked List"><meta property="article:tag" content="Music Player"><meta property="article:published_time" content="2025-02-11T00:00:00+08:00"><meta property="article:modified_time" content="2025-02-11T00:00:00+08:00"><meta property="og:image" content="https://xph0816.github.io/p/c-music-player/4ivv.gif"><meta name=twitter:title content="C Music Player"><meta name=twitter:description content="A Knowledge Sharing about Data Structures and Algorithms in C Language for CLI Music Player"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://xph0816.github.io/p/c-music-player/4ivv.gif"><link rel="shortcut icon" href=/favicon.svg></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu12ef359483bc258b4d0472d73331359c_69166_300x0_resize_q75_box.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar></a>
+<span class=emoji>📖</span></figure><div class=site-meta><h1 class=site-name><a href=/>Song's Blog</a></h1><h2 class=site-description>Studying</h2></div></header><ol class=social-menu><li><a href=https://github.com/XPH0816 target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://www.linkedin.com/in/lss0816/ target=_blank title=Linkedin rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="8" y1="11" x2="8" y2="16"/><line x1="8" y1="8" x2="8" y2="8.01"/><line x1="12" y1="16" x2="12" y2="11"/><path d="M16 16v-3a2 2 0 00-4 0"/></svg></a></li><li><a href=/img/qrcode.png target=_blank title=WeChat rel=me><!doctype html><svg t="1676174392026" class="icon" viewBox="0 0 1194 1024" xmlns="http://www.w3.org/2000/svg" p-id="2999" xmlns:xlink="http://www.w3.org/1999/xlink" width="233.203125" height="200"><path d="M728.064 535.296a35.498667 35.498667.0 11-70.912.0 35.498667 35.498667.0 0170.912.0m246.016.0a35.498667 35.498667.0 11-70.997333.0 35.498667 35.498667.0 0170.997333.0" fill="#cdcdcd" p-id="3e3"/><path d="M902.144 930.133333l-6.656 1.450667a594.176 594.176.0 01-18.602667 3.669333c-26.453333 4.778667-44.629333 6.826667-64 6.144C645.034666 935.850666 514.218666 853.504 461.824 722.688a446.464 446.464.0 01-6.826667-19.114667l-1.962666-6.058666a199.68 199.68.0 01-3.84-13.653334 338.858667 338.858667.0 01-9.216-75.690666c0-171.008 157.013333-305.92 354.304-314.709334l8.874666-.682666c7.850667-.597333 12.970667-.853333 18.773334-.853334h14.762666l9.301334.170667c188.16 14.677333 340.394667 156.672 340.394666 323.925333.0 78.336-38.826667 155.733333-109.653333 222.293334a303.530667 303.530667.0 01-7.082667 6.4l9.984 71.082666a49.152 49.152.0 01-69.12 58.453334l-98.816-46.421334a582.485333 582.485333.0 01-9.472 2.304zm220.16-314.026666c0-131.754667-124.586667-247.978667-279.125333-260.096H821.930667c-3.754667.0-7.68.085333-13.994667.597333l-10.666667.768C631.466667 364.8 503.978667 474.453333 503.978667 608.256c0 18.773333 2.730667 40.874667 7.509333 60.842667.597333 2.474667 1.450667 5.632 2.56 9.216l1.706667 4.949333c2.133333 6.570667 4.266667 12.629333 5.632 15.957333 42.325333 105.728 149.930667 173.397333 293.717333 178.176 13.738667.512 28.16-1.109333 50.346667-5.12a531.626667 531.626667.0 0016.64-3.242666l5.632-1.28c4.693333-1.109333 8.448-1.962667 19.370666-4.778667a32 32 0 0121.418667 2.133333L1013.76 905.216l-9.984-69.290667a32 32 0 0113.909333-31.232c1.194667-.853333 8.618667-6.912 15.189334-13.056 58.709333-55.210667 89.429333-116.394667 89.429333-175.616zM12.970667 378.197333C12.970667 171.52 206.677333 5.376 442.709333 5.376c208.384.0 394.24 130.304 431.872 306.090667 1.28 5.973333 1.28 11.264.512 16.896a32 32 0 01-63.658666-5.973334C779.178667 179.2 621.482667 69.376 442.709333 69.376c-202.666666.0-365.738666 139.776-365.738666 308.906667.0 89.941333 46.165333 171.52 136.021333 237.568a32 32 0 0111.434667 35.84l-23.296 69.973333 104.96-48.896a32 32 0 0122.442666-1.706667l5.461334 1.706667c54.357333 11.093333 76.288 14.506667 108.714666 14.506667a200.789333 200.789333.0 0032.256-4.010667c-.512.170667-1.536.512-2.730666 1.536a33.109333 33.109333.0 0139.253333 1.109333A32 32 0 01516.864 730.88c-11.776 14.848-47.36 20.309333-74.24 20.309333-37.12.0-62.037333-3.584-119.893333-15.530666L198.570667 793.6a49.493333 49.493333.0 01-68.949334-59.733333l26.88-80.64c-93.525333-75.52-143.530666-170.24-143.530666-275.029334z" fill="#cdcdcd" p-id="3001"/><path d="M344.576 254.378667a44.373333 44.373333.0 11-88.746667.085333 44.373333 44.373333.0 0188.746667.0M636.586667 254.378667A44.373333 44.373333.0 11547.84 254.464a44.373333 44.373333.0 0188.746667.0" fill="#cdcdcd" p-id="3002"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/projects/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-stars" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17.8 19.817l-2.172 1.138a.392.392.0 01-.568-.41l.415-2.411-1.757-1.707a.389.389.0 01.217-.665l2.428-.352 1.086-2.193a.392.392.0 01.702.0l1.086 2.193 2.428.352a.39.39.0 01.217.665l-1.757 1.707.414 2.41a.39.39.0 01-.567.411L17.8 19.817z"/><path d="M6.2 19.817l-2.172 1.138a.392.392.0 01-.568-.41l.415-2.411-1.757-1.707a.389.389.0 01.217-.665l2.428-.352 1.086-2.193a.392.392.0 01.702.0l1.086 2.193 2.428.352a.39.39.0 01.217.665l-1.757 1.707.414 2.41a.39.39.0 01-.567.411L6.2 19.817z"/><path d="M12 9.817l-2.172 1.138a.392.392.0 01-.568-.41l.415-2.411-1.757-1.707a.389.389.0 01.217-.665l2.428-.352 1.086-2.193a.392.392.0 01.702.0l1.086 2.193 2.428.352a.39.39.0 01.217.665l-1.757 1.707.414 2.41a.39.39.0 01-.567.411L12 9.817z"/></svg><span>Projects</span></a></li><div class=menu-bottom-section><li id=i18n-switch><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg><select name=language onchange="window.location.href=this.selectedOptions[0].value"><option value=https://xph0816.github.io/ selected>English</option><option value=https://xph0816.github.io/zhcn/>简体中文</option></select></li><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>Dark Mode</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#introduction>Introduction</a></li><li><a href=#why-a-cli-music-player>Why a CLI Music Player?</a></li><li><a href=#setting-up-the-project>Setting Up the Project</a><ol><li><a href=#linux>Linux</a></li><li><a href=#windows-mingw>Windows (MinGW)</a><ol><li><a href=#ways-to-set-path>Ways to Set PATH</a></li></ol></li></ol></li><li><a href=#implementation-of-the-music-player>Implementation of the Music Player</a><ol><li><a href=#software-architecture>Software Architecture</a></li><li><a href=#frontend-implementation>Frontend Implementation</a><ol><li><a href=#basic-ui-implementation>Basic UI Implementation</a></li><li><a href=#playlist-implementation-doubly-linked-list>Playlist Implementation (Doubly Linked List)</a></li><li><a href=#cursor-implementation>Cursor Implementation</a></li></ol></li><li><a href=#backend-implementation>Backend Implementation</a><ol><li><a href=#player-implementation>Player Implementation</a></li><li><a href=#stop-function>Stop Function</a></li></ol></li></ol></li><li><a href=#conclusion>Conclusion</a></li><li><a href=#references>References</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/c-music-player/><img src=/p/c-music-player/4ivv_hua574dfefd32d720d1387155b3ad52742_11569_800x0_resize_box_1.gif srcset="/p/c-music-player/4ivv_hua574dfefd32d720d1387155b3ad52742_11569_800x0_resize_box_1.gif 800w, /p/c-music-player/4ivv_hua574dfefd32d720d1387155b3ad52742_11569_1600x0_resize_box_1.gif 1600w" width=498 height=252 loading=lazy alt="Featured image of post C Music Player"></a></div><div class=article-details><header class=article-category><a href=/categories/c/ style=background-color:#2a9d8f;color:#fff>C</a>
+<a href=/categories/data-structure/ style=background-color:#2a9d8f;color:#fff>Data Structure</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/c-music-player/>C Music Player</a></h2><h3 class=article-subtitle>A Knowledge Sharing about Data Structures and Algorithms in C Language for CLI Music Player</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Feb 11, 2025</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>8 minute read</time></div></footer></div></header><section class=article-content><h2 id=introduction>Introduction</h2><p>In this blog post, we will explore the development of a Command Line Interface (CLI) Music Player using the C programming language. This project will help you understand various data structures and algorithms, particularly focusing on the implementation of a double linked list and the architecture of a music player which can be used to play music files.</p><h2 id=why-a-cli-music-player>Why a CLI Music Player?</h2><p>Creating a CLI Music Player is an excellent way to practice and enhance programming skills in C. It involves managing data structures, and implementing algorithms to manipulate and play music files. Additionally, it provides a practical application of theoretical concepts.</p><h2 id=setting-up-the-project>Setting Up the Project</h2><p>To get started, ensure I have a C compiler installed on my system. I can use GCC compiler, which is available on most platforms. Create a new directory for your project and initialize it with the necessary files.</p><h3 id=linux>Linux</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt install gcc
+</span></span><span class=line><span class=cl>mkdir music-player
+</span></span><span class=line><span class=cl><span class=nb>cd</span> music-player
+</span></span></code></pre></td></tr></table></div></div><h3 id=windows-mingw>Windows (MinGW)</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=n>scoop</span> <span class=n>install</span> <span class=n>w64devkit</span> <span class=c># Install MinGW using Scoop sometime not latest version </span>
+</span></span><span class=line><span class=cl><span class=n>mkdir</span> <span class=nb>music-player</span>
+</span></span><span class=line><span class=cl><span class=nb>cd music-player</span>
+</span></span></code></pre></td></tr></table></div></div><p>or download from <a class=link href=https://github.com/skeeto/w64devkit target=_blank rel=noopener>GitHub</a> and Set the PATH Environment Variable.</p><h4 id=ways-to-set-path>Ways to Set PATH</h4><ol><li><a class=link href=https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/ target=_blank rel=noopener>How to set PATH Tutorial</a></li><li>Add <code>&lt;path-to-w64devkit>\w64devkit\bin</code> to PATH.</li></ol><h2 id=implementation-of-the-music-player>Implementation of the Music Player</h2><h3 id=software-architecture>Software Architecture</h3><p><img src=/p/c-music-player/architecture.svg loading=lazy alt="Software Architecture"></p><p>The music player will be implemented in two parts: the frontend and the backend. The frontend will handle the user interface and interaction, while the backend will manage the music files and playback.</p><h3 id=frontend-implementation>Frontend Implementation</h3><h4 id=basic-ui-implementation>Basic UI Implementation</h4><h5 id=main-menu-implementation>Main Menu Implementation</h5><p>Main menu is the first screen that the user will see when they start the music player. It will display the available options and allow the user to navigate through the application.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>int</span> <span class=nf>MainMenu</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Welcome to Music Player 1.0</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;1. Select song from the Song List</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;2. Play the selected song</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;3. Next song</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;4. Previous song</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;5. Display the current Playlist</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;6. Delete the current song</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;7. Delete Song from the PlayList</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;8. Exit</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nf>getValidInt</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=s>&#34;Enter your choice: &#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Main menu will display the available options and prompt the user to enter a choice. The <code>getValidInt</code> function is used to validate the user input and ensure that it is within the specified range.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>int</span> <span class=nf>getValidInt</span><span class=p>(</span><span class=kt>int</span> <span class=n>min</span><span class=p>,</span> <span class=kt>int</span> <span class=n>max</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=n>message</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kt>int</span> <span class=n>input</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=k>do</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%s&#34;</span><span class=p>,</span> <span class=n>message</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=nf>scanf</span><span class=p>(</span><span class=s>&#34;%d&#34;</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>input</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=p>(</span><span class=n>input</span> <span class=o>&lt;</span> <span class=n>min</span> <span class=o>||</span> <span class=n>input</span> <span class=o>&gt;</span> <span class=n>max</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Invalid input. Please enter a number between %d and %d.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>min</span><span class=p>,</span> <span class=n>max</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span> <span class=k>while</span> <span class=p>(</span><span class=n>input</span> <span class=o>&lt;</span> <span class=n>min</span> <span class=o>||</span> <span class=n>input</span> <span class=o>&gt;</span> <span class=n>max</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=n>input</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>The <code>getValidInt</code> function will keep prompting the user to enter a number until a valid input is provided. Next, we will put it all together in the <code>main</code> function.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=n>List</span> <span class=o>*</span><span class=n>list</span> <span class=o>=</span> <span class=nf>newList</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>	<span class=n>Cursor</span> <span class=o>*</span><span class=n>cursor</span> <span class=o>=</span> <span class=nf>newCursor</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span><span class=p>(;;){</span>
+</span></span><span class=line><span class=cl>		<span class=k>switch</span> <span class=p>(</span><span class=nf>MainMenu</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>		<span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=mi>1</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// Add song to the playlist
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=mi>2</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// Play the selected song
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=mi>3</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// Play the next song
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=mi>4</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// Play the previous song
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=mi>5</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// Display the current playlist
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=mi>6</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// Delete the current song
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=mi>7</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// Delete song from the playlist
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=mi>8</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// Exit the application
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=nf>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>			<span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Press any key to continue . . .&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=nf>getch</span><span class=p>();</span> <span class=c1>// #include &lt;conio.h&gt;
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=p>};</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>The <code>main</code> function will display the main menu and prompt the user to enter a choice. Based on the user&rsquo;s input, it will call the corresponding function to perform the desired action. The <code>do-while</code> loop will keep the application running until the user chooses to exit.</p><h4 id=playlist-implementation-doubly-linked-list>Playlist Implementation (Doubly Linked List)</h4><p>A double linked list is a data structure that allows traversal in both directions. It is ideal for managing the playlist in our music player. Below is a simple implementation of a double linked list in C.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=k>typedef</span> <span class=k>struct</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=n>string</span> <span class=n>name</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=n>Song</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>struct</span> <span class=n>node</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>struct</span> <span class=n>node</span> <span class=o>*</span><span class=n>prev</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=n>Song</span> <span class=n>data</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=k>struct</span> <span class=n>node</span> <span class=o>*</span><span class=n>next</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>typedef</span> <span class=k>struct</span> <span class=n>node</span> <span class=n>Node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>typedef</span> <span class=k>struct</span> <span class=n>PLAYLIST</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=n>Node</span> <span class=o>*</span><span class=n>head</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=n>Node</span> <span class=o>*</span><span class=n>tail</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kt>int</span> <span class=n>size</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=n>List</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>Node</span> <span class=o>*</span><span class=nf>newNode</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=n>Node</span> <span class=o>*</span><span class=n>node</span> <span class=o>=</span> <span class=p>(</span><span class=n>Node</span> <span class=o>*</span><span class=p>)</span><span class=nf>malloc</span><span class=p>(</span><span class=k>sizeof</span><span class=p>(</span><span class=n>Node</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>	<span class=n>node</span><span class=o>-&gt;</span><span class=n>prev</span> <span class=o>=</span> <span class=nb>NULL</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=n>node</span><span class=o>-&gt;</span><span class=n>next</span> <span class=o>=</span> <span class=nb>NULL</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=n>node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>List</span> <span class=o>*</span><span class=nf>newList</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=n>List</span> <span class=o>*</span><span class=n>list</span> <span class=o>=</span> <span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=p>)</span><span class=nf>malloc</span><span class=p>(</span><span class=k>sizeof</span><span class=p>(</span><span class=n>List</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>	<span class=n>list</span><span class=o>-&gt;</span><span class=n>head</span> <span class=o>=</span> <span class=nb>NULL</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=n>list</span><span class=o>-&gt;</span><span class=n>tail</span> <span class=o>=</span> <span class=nb>NULL</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=n>list</span><span class=o>-&gt;</span><span class=n>size</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=n>list</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>addSong</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>,</span> <span class=n>Node</span> <span class=o>*</span><span class=n>node</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=p>(</span><span class=n>list</span><span class=o>-&gt;</span><span class=n>head</span> <span class=o>==</span> <span class=nb>NULL</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=n>list</span><span class=o>-&gt;</span><span class=n>head</span> <span class=o>=</span> <span class=n>node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=n>list</span><span class=o>-&gt;</span><span class=n>tail</span> <span class=o>=</span> <span class=n>node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>else</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=n>list</span><span class=o>-&gt;</span><span class=n>tail</span><span class=o>-&gt;</span><span class=n>next</span> <span class=o>=</span> <span class=n>node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=n>node</span><span class=o>-&gt;</span><span class=n>prev</span> <span class=o>=</span> <span class=n>list</span><span class=o>-&gt;</span><span class=n>tail</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=n>list</span><span class=o>-&gt;</span><span class=n>tail</span> <span class=o>=</span> <span class=n>node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=n>list</span><span class=o>-&gt;</span><span class=n>size</span><span class=o>++</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>printPlayList</span><span class=p>(</span><span class=n>List</span> <span class=n>list</span><span class=p>,</span> <span class=n>Cursor</span> <span class=n>cursor</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=n>Node</span> <span class=o>*</span><span class=n>node</span> <span class=o>=</span> <span class=n>list</span><span class=p>.</span><span class=n>head</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;+---------+---------------------------------------------------------------+</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;|  Index  |                             Title                             |</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;+---------+---------------------------------------------------------------+</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=kt>int</span> <span class=n>index</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kt>char</span> <span class=n>buffer</span><span class=p>[</span><span class=n>MAX_INDEX</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>	<span class=k>while</span> <span class=p>(</span><span class=n>node</span> <span class=o>!=</span> <span class=nb>NULL</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nf>snprintf</span><span class=p>(</span><span class=n>buffer</span><span class=p>,</span> <span class=n>MAX_INDEX</span><span class=p>,</span> <span class=s>&#34;%d&#34;</span><span class=p>,</span> <span class=n>index</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;| %7s | %61s |</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>index</span> <span class=o>==</span> <span class=n>cursor</span><span class=p>.</span><span class=n>index</span> <span class=o>?</span> <span class=s>&#34; * &#34;</span> <span class=o>:</span> <span class=n>buffer</span><span class=p>,</span> <span class=n>node</span><span class=o>-&gt;</span><span class=n>data</span><span class=p>.</span><span class=n>name</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=n>node</span> <span class=o>=</span> <span class=n>node</span><span class=o>-&gt;</span><span class=n>next</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=n>index</span><span class=o>++</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;+---------+---------------------------------------------------------------+</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=cursor-implementation>Cursor Implementation</h4><h5 id=cursor-definition>Cursor Definition</h5><p>The cursor feature allows the user to navigate through the playlist and select a song to play. It keeps track of the current position in the playlist and provides methods to move to the next or previous song. The cursor structure is defined as follows:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=k>typedef</span> <span class=k>struct</span> <span class=n>CURSOR</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=n>Node</span> <span class=o>*</span><span class=n>node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kt>int</span> <span class=n>index</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=n>Cursor</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=next-and-previous-song>Next and Previous Song</h5><p>Before we implement the <code>next</code> and <code>prev</code> functions, we need to define a helper function to check if the cursor is currently pointing to a song in the playlist.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>int</span> <span class=nf>isSelected</span><span class=p>(</span><span class=n>Cursor</span> <span class=o>*</span><span class=n>cursor</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=p>(</span><span class=n>cursor</span><span class=o>-&gt;</span><span class=n>node</span> <span class=o>==</span> <span class=nb>NULL</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;No song selected.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>The <code>next</code> and <code>prev</code> functions will move the cursor to the next and previous songs in the playlist, respectively. Because the doubly linked list allows traversal in both directions, we can easily implement these functions.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>void</span> <span class=nf>next</span><span class=p>(</span><span class=n>Cursor</span> <span class=o>*</span><span class=n>cursor</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// Check if the cursor is at the end of the playlist
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nf>isSelected</span><span class=p>(</span><span class=n>cursor</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// Move the cursor to the next song
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>if</span> <span class=p>(</span><span class=n>cursor</span><span class=o>-&gt;</span><span class=n>node</span><span class=o>-&gt;</span><span class=n>next</span> <span class=o>==</span> <span class=nb>NULL</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;This is the last song.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// Move the cursor to the next song
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=n>cursor</span><span class=o>-&gt;</span><span class=n>node</span> <span class=o>=</span> <span class=n>cursor</span><span class=o>-&gt;</span><span class=n>node</span><span class=o>-&gt;</span><span class=n>next</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=n>cursor</span><span class=o>-&gt;</span><span class=n>index</span><span class=o>++</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=nf>clearScreen</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>prev</span><span class=p>(</span><span class=n>Cursor</span> <span class=o>*</span><span class=n>cursor</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nf>isSelected</span><span class=p>(</span><span class=n>cursor</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=p>(</span><span class=n>cursor</span><span class=o>-&gt;</span><span class=n>node</span><span class=o>-&gt;</span><span class=n>prev</span> <span class=o>==</span> <span class=nb>NULL</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;This is the first song.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=n>cursor</span><span class=o>-&gt;</span><span class=n>node</span> <span class=o>=</span> <span class=n>cursor</span><span class=o>-&gt;</span><span class=n>node</span><span class=o>-&gt;</span><span class=n>prev</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=n>cursor</span><span class=o>-&gt;</span><span class=n>index</span><span class=o>--</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=nf>clearScreen</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Playing %s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>cursor</span><span class=o>-&gt;</span><span class=n>node</span><span class=o>-&gt;</span><span class=n>data</span><span class=p>.</span><span class=n>name</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=example-of-the-playlist>Example of the Playlist</h5><p><img src=/p/c-music-player/playlist-visualization.svg loading=lazy alt="Playlist Visualization"></p><h3 id=backend-implementation>Backend Implementation</h3><h4 id=player-implementation>Player Implementation</h4><p>Next, we will build the core functionality of the music player. This includes loading songs, playing, pausing, and stopping playback. We will use the double linked list to manage the playlist. Now, we define the player structure and the corresponding functions.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=k>struct</span> <span class=n>Player</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=n>ma_sound</span> <span class=n>sound</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=n>ma_engine</span> <span class=n>engine</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=n>player</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>The <code>Player</code> structure contains the <code>miniaudio</code> sound and engine objects, which are used to play audio files. We will implement the following <code>play</code> function to play the selected song.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>void</span> <span class=nf>play</span><span class=p>(</span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>path</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kt>char</span> <span class=n>buffer</span><span class=p>[</span><span class=nf>strlen</span><span class=p>(</span><span class=n>path</span><span class=p>)</span> <span class=o>+</span> <span class=nf>strlen</span><span class=p>(</span><span class=s>&#34;./music/&#34;</span><span class=p>)</span> <span class=o>+</span> <span class=nf>strlen</span><span class=p>(</span><span class=s>&#34;.mp3&#34;</span><span class=p>)</span> <span class=o>+</span> <span class=mi>1</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>	<span class=nf>strcpy</span><span class=p>(</span><span class=n>buffer</span><span class=p>,</span> <span class=s>&#34;./music/&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nf>strcat</span><span class=p>(</span><span class=n>buffer</span><span class=p>,</span> <span class=n>path</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nf>strcat</span><span class=p>(</span><span class=n>buffer</span><span class=p>,</span> <span class=s>&#34;.mp3&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nf>stop</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=n>ma_result</span> <span class=n>result</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=n>result</span> <span class=o>=</span> <span class=nf>ma_engine_init</span><span class=p>(</span><span class=nb>NULL</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>player</span><span class=p>.</span><span class=n>engine</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=p>(</span><span class=n>result</span> <span class=o>!=</span> <span class=n>MA_SUCCESS</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Failed to initialize audio engine.&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=n>result</span> <span class=o>=</span> <span class=nf>ma_sound_init_from_file</span><span class=p>(</span><span class=o>&amp;</span><span class=n>player</span><span class=p>.</span><span class=n>engine</span><span class=p>,</span> <span class=n>buffer</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>player</span><span class=p>.</span><span class=n>sound</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=p>(</span><span class=n>result</span> <span class=o>!=</span> <span class=n>MA_SUCCESS</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Failed to load sound file.&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nf>ma_sound_set_looping</span><span class=p>(</span><span class=o>&amp;</span><span class=n>player</span><span class=p>.</span><span class=n>sound</span><span class=p>,</span> <span class=n>MA_TRUE</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nf>ma_sound_start</span><span class=p>(</span><span class=o>&amp;</span><span class=n>player</span><span class=p>.</span><span class=n>sound</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>The <code>play</code> function takes the path to the audio file as an argument and plays the file using the <code>miniaudio</code> library. It first stops the current playback, initializes the audio engine, and loads the sound file. Finally, it starts playing the sound.</p><h4 id=stop-function>Stop Function</h4><p>The <code>stop</code> function stops the current playback and cleans up the audio engine and sound objects.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>void</span> <span class=nf>stop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=p>(</span><span class=nf>ma_sound_is_playing</span><span class=p>(</span><span class=o>&amp;</span><span class=n>player</span><span class=p>.</span><span class=n>sound</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nf>ma_sound_stop</span><span class=p>(</span><span class=o>&amp;</span><span class=n>player</span><span class=p>.</span><span class=n>sound</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nf>ma_sound_uninit</span><span class=p>(</span><span class=o>&amp;</span><span class=n>player</span><span class=p>.</span><span class=n>sound</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nf>ma_engine_uninit</span><span class=p>(</span><span class=o>&amp;</span><span class=n>player</span><span class=p>.</span><span class=n>engine</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>The <code>stop</code> function checks if the sound is currently playing and stops it. It then uninitializes the sound and engine objects.</p><h2 id=conclusion>Conclusion</h2><p>In this blog post, we have laid the foundation for a CLI Music Player using C. We discussed the importance of such a project, set up the project structure, and implemented a double linked list to manage the playlist. In future posts, we will expand on this by adding more features and improving the user interface.</p><p>Stay tuned for more updates and happy coding!</p><h2 id=references>References</h2><ul><li><a class=link href=https://github.com/XPH0816/DSA-Project target=_blank rel=noopener>GitHub Repository</a></li></ul></section><footer class=article-footer><section class=article-tags><a href=/tags/c/>C</a>
+<a href=/tags/data-structure/>Data Structure</a>
+<a href=/tags/double-linked-list/>Double Linked List</a>
+<a href=/tags/music-player/>Music Player</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><footer class=site-footer><section class=copyright>&copy;
+2022 -
+2025 Song's Blog</section><section class=powerby>Sing Sing Song Song<br>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.21.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

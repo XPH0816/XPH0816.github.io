@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Frontend Development on Song's Blog</title><link>https://xph0816.github.io/categories/frontend-development/</link><description>Recent content in Frontend Development on Song's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 19 Aug 2023 00:00:00 +0800</lastBuildDate><atom:link href="https://xph0816.github.io/categories/frontend-development/index.xml" rel="self" type="application/rss+xml"/><item><title>Event Loop</title><link>https://xph0816.github.io/p/event-loop/</link><pubDate>Sat, 19 Aug 2023 00:00:00 +0800</pubDate><guid>https://xph0816.github.io/p/event-loop/</guid><description>&lt;img src="https://developer.chrome.com/static/blog/inside-browser-part1/image/browser-architecture-9d143004c2a63_856.png" alt="Featured image of post Event Loop" />&lt;h2 id="process-model-of-browser">Process Model of Browser&lt;/h2>
+&lt;hr>
+&lt;h3 id="what-is-a-process">What is a Process?&lt;/h3>
+&lt;p>Every program has their own memory space, and the program can only access the memory space of itself. This memory space is called &lt;strong>Process&lt;/strong>.&lt;/p>
+&lt;p>Each program has at least one process, and processes are isolated from each other. If a program wants to access the memory space of another program, it must use &lt;strong>Inter-Process Communication&lt;/strong>, and need to be authorized by the operating system.&lt;/p>
+&lt;hr>
+&lt;h3 id="what-is-a-thread">What is a Thread?&lt;/h3>
+&lt;p>Once a process is created, it will have at least one thread, which is called &lt;strong>Main Thread&lt;/strong>.
+If the program wants to do multiple things at the same time, it needs to create multiple threads.&lt;/p>
+&lt;hr>
+&lt;h3 id="browser-have-which-processes-and-threads">Browser have which processes and threads?&lt;/h3>
+&lt;p>Browser is a multi-process and multi-threaded program.
+Multi-process uses to reduce the risk of crash, when open the browser, it will automatically create many processes.
+The main processes are:&lt;/p>
+&lt;ul>
+&lt;li>Browser Process&lt;/li>
+&lt;li>Network Process&lt;/li>
+&lt;li>Renderer Process&lt;/li>
+&lt;li>GPU Process&lt;/li>
+&lt;li>Storage Service Process&lt;/li>
+&lt;li>Audio Service Process&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://xph0816.github.io/p/event-loop/browser-process.png"
+width="1294"
+height="493"
+srcset="https://xph0816.github.io/p/event-loop/browser-process_hu4987a3a4161049fecad3d666a92a45ca_36462_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/event-loop/browser-process_hu4987a3a4161049fecad3d666a92a45ca_36462_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Proof of Browser Process"
+class="gallery-image"
+data-flex-grow="262"
+data-flex-basis="629px"
+>&lt;/p>
+&lt;p>The Most important processes are:&lt;/p>
+&lt;ol>
+&lt;li>Browser Process
+&lt;ul>
+&lt;li>Mainly responsible for interface display, user interaction, sub-process management, etc. The browser process will start multiple threads to handle different tasks.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Network Process
+&lt;ul>
+&lt;li>Responsible for loading network resources. The network process will start multiple threads to handle different network tasks.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Renderer Process&lt;/strong> (The main process we will talk about in this lesson)
+&lt;ul>
+&lt;li>After the renderer process is started, it will open a &lt;strong>Renderer Main Thread&lt;/strong>, which is responsible for executing HTML, CSS, and JS code.&lt;/li>
+&lt;li>By default, the browser will open a new renderer process for each tab to ensure that different tabs do not affect each other.&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>This default mode may change in the future. Interested students can refer to the &lt;a class="link" href="https://chromium.googlesource.com/chromium/src/&amp;#43;/main/docs/process_model_and_site_isolation.md#Modes-and-Availability" target="_blank" rel="noopener"
+>chrome official documentation&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://developer.chrome.com/static/blog/inside-browser-part1/image/chrome-processes-79aaecca78d23_856.png"
+loading="lazy"
+alt="Process and What it controls"
+>&lt;/p>
+&lt;hr>
+&lt;h3 id="how-does-the-renderer-main-thread-work">How does the Renderer Main Thread work?&lt;/h3>
+&lt;p>The renderer main thread is the busiest thread in the browser. The tasks it needs to handle include but are not limited to:&lt;/p>
+&lt;ul>
+&lt;li>Parse HTML&lt;/li>
+&lt;li>Parse CSS&lt;/li>
+&lt;li>Calculate style&lt;/li>
+&lt;li>Layout&lt;/li>
+&lt;li>Paint&lt;/li>
+&lt;li>Compositing&lt;/li>
+&lt;li>Every frame rendering (60fps)&lt;/li>
+&lt;li>Execute JS code&lt;/li>
+&lt;li>Handle user interaction&lt;/li>
+&lt;li>Handle timer events&lt;/li>
+&lt;li>Handle network events&lt;/li>
+&lt;li>&amp;hellip;&amp;hellip; and more&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Q: Why render process don&amp;rsquo;t use multiple threads to handle these tasks?&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>A: Because the tasks are related to each other, and the order of execution is very important. If multiple threads are used to handle these tasks, it will be very difficult to ensure the order of execution.&lt;/p>
+&lt;/blockquote>
+&lt;p>Main render thread faces a lot of tasks, and how does it schedule these tasks?
+example:&lt;/p>
+&lt;ul>
+&lt;li>When the main thread is executing a JS code, how does it handle the user&amp;rsquo;s click event?&lt;/li>
+&lt;li>When the main thread is executing a JS code, the timer event is triggered, how does it handle the timer event?&lt;/li>
+&lt;li>Browser process annouce that user click a button, and the same time, the timer event is triggered, how does the main thread handle these two events?&lt;/li>
+&lt;li>&amp;hellip;&lt;/li>
+&lt;/ul>
+&lt;p>Main thread use message queue to schedule these tasks.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/event-loop/message-quering.png"
+width="1030"
+height="446"
+srcset="https://xph0816.github.io/p/event-loop/message-quering_hu2c839b8caecaca8f2c3298d98e521dd5_49833_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/event-loop/message-quering_hu2c839b8caecaca8f2c3298d98e521dd5_49833_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Message Queue"
+class="gallery-image"
+data-flex-grow="230"
+data-flex-basis="554px"
+>&lt;/p>
+&lt;ol>
+&lt;li>From the beginning, main thread will enter the &lt;strong>Event Loop&lt;/strong>.&lt;/li>
+&lt;li>Event Loop will check if there is any task in the &lt;strong>Message Queue&lt;/strong>. If there is a task, it will take the task out of the message queue and execute it immediately. If not, it will wait for the task to be added to the message queue and enter the sleep state.&lt;/li>
+&lt;li>Other threads (including other threads in the other processes) can add tasks to the message queue at any time. New tasks will be added to the end of the message queue. When new tasks are added, the main thread will wake up and take the task out of the message queue and execute it immediately.&lt;/li>
+&lt;/ol>
+&lt;p>In this way, each task can be carried out in an orderly and continuous manner&lt;/p>
+&lt;p>&lt;strong>The Whole Process is called Event Loop&lt;/strong>&lt;/p>
+&lt;h2 id="some-explaination">Some Explaination&lt;/h2>
+&lt;h3 id="what-is-asynchronous">What is Asynchronous?&lt;/h3>
+&lt;p>Code in execution, there will be some tasks that cannot process immediately, Example:&lt;/p>
+&lt;ul>
+&lt;li>Tasks that need to be performed after the timer is triggered &amp;ndash; &lt;code>setTimeout&lt;/code>, &lt;code>setInterval&lt;/code>&lt;/li>
+&lt;li>Tasks that need to be performed after the network request is completed &amp;ndash; &lt;code>fetch&lt;/code>, &lt;code>XMLHttpRequest&lt;/code>&lt;/li>
+&lt;li>Tasks that need to be performed after the user action is triggered &amp;ndash; &lt;code>addEventListener&lt;/code>
+if main thread wait for these tasks to complete, it will block the main thread, and the main thread will not be able to handle other tasks, which will cause the page to freeze.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://xph0816.github.io/p/event-loop/main-thread-block.png"
+width="1134"
+height="456"
+srcset="https://xph0816.github.io/p/event-loop/main-thread-block_hu4230c6300686cf6351e7c3a4c409c313_99857_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/event-loop/main-thread-block_hu4230c6300686cf6351e7c3a4c409c313_99857_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Main Thread Block"
+class="gallery-image"
+data-flex-grow="248"
+data-flex-basis="596px"
+>&lt;/p>
+&lt;p>&lt;strong>Main thread focus on most important tasks, it must not be blocked.&lt;/strong>
+So, browser will use &lt;strong>Asynchronous&lt;/strong> to handle these tasks.
+Use &lt;strong>Asynchronous&lt;/strong> to handle these tasks, the main thread will not be blocked.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/event-loop/main-thread-asynchronous.png"
+width="1172"
+height="500"
+srcset="https://xph0816.github.io/p/event-loop/main-thread-asynchronous_hudf7f154a3e68e4afa1a10d972f07f4f1_96830_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/event-loop/main-thread-asynchronous_hudf7f154a3e68e4afa1a10d972f07f4f1_96830_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Main Thread Asynchronous"
+class="gallery-image"
+data-flex-grow="234"
+data-flex-basis="562px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>Q: How do understand the asynchrony of JS?&lt;/p>
+&lt;p>Answer: JS is a single-threaded language, this is because the execution of JS code is performed in the main thread and main render thread is just only one thread and the main render thread need to handle a lot of tasks, like rendering, executing JS code, handling user interaction, handling timer events, handling network events, etc. Using synchronous to handle these tasks, the busy main thread will waste time in vain, and on the other hand, the page cannot be updated in time, causing the user to be stuck in the page. So the browser uses an asynchronous way to avoid it. The specific method is that when certain tasks occur, such as timers, network, and event monitoring, the main thread will hand over the tasks to other threads for processing, and immediately end the execution of the tasks by itself, and then execute subsequent codes. When other threads complete, wrap the callback function passed in advance into a task, add it to the end of the message queue, and wait for the main thread to schedule execution. In this asynchronous mode, the browser will never block, thus ensuring the smooth operation of single thread to the greatest extent.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="how-js-block-the-rendering">How JS block the rendering?&lt;/h3>
+&lt;p>Here is an example:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Hello World!&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">button&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>change&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">button&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">h1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;h1&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">btn&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;button&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 死循环指定的时间
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">function&lt;/span> &lt;span class="nx">delay&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">duration&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">start&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nb">Date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nx">start&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">btn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">onclick&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">h1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Don’t want to Hello the World！&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">delay&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>After click the button, the h1 text will change after 3 seconds.&lt;/p>
+&lt;h3 id="priority-of-the-message-queue">Priority of the Message Queue&lt;/h3>
+&lt;p>Task don&amp;rsquo;t have priority, the message queue is FIFO (First In First Out).&lt;/p>
+&lt;p>But the message queue has priority.&lt;/p>
+&lt;p>According to Latest W3C standard:&lt;/p>
+&lt;ul>
+&lt;li>Every Task has a task type, the same task type must in the same queue, different task type must in different queue. In the Event Loop, browser will based on the task type to execute the task.&lt;/li>
+&lt;li>The browser must prepare a micro-queue, and tasks in the micro-queue are executed prior to all other tasks &lt;a class="link" href="https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint" target="_blank" rel="noopener"
+>https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>As the complexity of browsers has increased dramatically, the W3C no longer uses the term macro queue.&lt;/p>
+&lt;/blockquote>
+&lt;p>In the Chrome browser, the message queue is divided into various types:&lt;/p>
+&lt;ul>
+&lt;li>Timer Task Queue: used to store the callback task after the timer arrives, the priority is &amp;ldquo;medium&amp;rdquo;&lt;/li>
+&lt;li>User Interaction Task Queue: used to store the callback task after the user interaction event is triggered, the priority is &amp;ldquo;high&amp;rdquo;&lt;/li>
+&lt;li>Micro Task Queue: used to store micro tasks, the priority is &amp;ldquo;highest&amp;rdquo;&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Method to add micro task is to use &lt;code>Promise, MutationObserver&lt;/code>&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Add a function to the micro task immediately
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nb">Promise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">resolve&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">fn&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>There are many other queues in the browser, which are not considered because they have little to do with our development&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>Interview Question: Explain the event loop of JS&lt;/p>
+&lt;p>Answer:&lt;/p>
+&lt;p>&lt;strong>Event Loop&lt;/strong> a.k.a &lt;strong>Message Loop&lt;/strong>, is the way the browser&amp;rsquo;s rendering main thread works&lt;/p>
+&lt;p>In the Source Code of Chromium, it opens an endless for loop, and each loop will take the first task from the message queue and execute it, and other threads only need to add tasks to the end of the queue at the right time.&lt;/p>
+&lt;p>In the past, the message queue was simply divided into macro queues and micro queues. This statement is no longer applicable to the complex browser environment. Instead, it is a more flexible and changeable processing method.&lt;/p>
+&lt;p>According to the official explanation of W3C, each task has a different type, and tasks of the same type must be in the same queue, and tasks of different types can belong to different queues. Different task queues have different priorities. In one event loop, the browser can decide which queue to take tasks from according to the actual situation. However, the browser must have a micro queue, and the tasks in the micro queue must have the highest priority and must be scheduled for execution first.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>Interview Question: Can the timer in JS be accurate? Why?&lt;/p>
+&lt;p>Answer:&lt;/p>
+&lt;p>Cannot be accurate, because:&lt;/p>
+&lt;ol>
+&lt;li>Computer hardware does not have an atomic clock, so it cannot be timed accurately.&lt;/li>
+&lt;li>The timing function of the operating system itself has a small deviation. Since the timer of JS ultimately calls the function of the operating system, it also carries these deviations&lt;/li>
+&lt;li>According to the W3C standard, when the browser implements the timer, if the nesting level exceeds 5 layers, it will have a minimum time of 4 milliseconds, which will bring deviations when the timing time is less than 4 milliseconds&lt;/li>
+&lt;li>Affected by the event loop, the callback function of the timer can only run when the main thread is idle, which brings deviations again&lt;/li>
+&lt;/ol>
+&lt;/blockquote>
+&lt;p>&lt;img src="https://xph0816.github.io/p/event-loop/cover.png"
+width="1298"
+height="960"
+srcset="https://xph0816.github.io/p/event-loop/cover_hu6906da3f6e6f146e764f66363372123f_210693_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/event-loop/cover_hu6906da3f6e6f146e764f66363372123f_210693_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Screenshot of the Event Loop"
+class="gallery-image"
+data-flex-grow="135"
+data-flex-basis="324px"
+>&lt;/p></description></item></channel></rss>
