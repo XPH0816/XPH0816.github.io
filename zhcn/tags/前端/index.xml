@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>前端 on Song's Blog</title><link>https://xph0816.github.io/zhcn/tags/%E5%89%8D%E7%AB%AF/</link><description>Recent content in 前端 on Song's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 19 Aug 2023 00:00:00 +0800</lastBuildDate><atom:link href="https://xph0816.github.io/zhcn/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml"/><item><title>事件循环</title><link>https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/</link><pubDate>Sat, 19 Aug 2023 00:00:00 +0800</pubDate><guid>https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/</guid><description>&lt;img src="https://developer.chrome.com/static/blog/inside-browser-part1/image/browser-architecture-9d143004c2a63_856.png" alt="Featured image of post 事件循环" />&lt;h1 id="事件循环">事件循环&lt;/h1>
+&lt;h2 id="浏览器的进程模型">浏览器的进程模型&lt;/h2>
+&lt;h3 id="何为进程">何为进程？&lt;/h3>
+&lt;p>程序运行需要有它自己专属的内存空间，可以把这块内存空间简单的理解为进程&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>每个应用至少有一个进程，进程之间相互独立，即使要通信，也需要双方同意。&lt;/p>
+&lt;h3 id="何为线程">何为线程？&lt;/h3>
+&lt;p>有了进程后，就可以运行程序的代码了。&lt;/p>
+&lt;p>运行代码的「人」称之为「线程」。&lt;/p>
+&lt;p>一个进程至少有一个线程，所以在进程开启后会自动创建一个线程来运行代码，该线程称之为主线程。&lt;/p>
+&lt;p>如果程序需要同时执行多块代码，主线程就会启动更多的线程来执行代码，所以一个进程中可以包含多个线程。&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image.png"
+width="1704"
+height="992"
+srcset="https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image_hua93047c22848e150831c0d025490419d_192359_480x0_resize_box_3.png 480w, https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image_hua93047c22848e150831c0d025490419d_192359_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="171"
+data-flex-basis="412px"
+>&lt;/p>
+&lt;h3 id="浏览器有哪些进程和线程">浏览器有哪些进程和线程？&lt;/h3>
+&lt;p>&lt;strong>浏览器是一个多进程多线程的应用程序&lt;/strong>&lt;/p>
+&lt;p>浏览器内部工作极其复杂。&lt;/p>
+&lt;p>为了避免相互影响，为了减少连环崩溃的几率，当启动浏览器后，它会自动启动多个进程。&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image-2.png"
+width="1518"
+height="1022"
+srcset="https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image-2_hub0c6070855705d45c976ae295ac28637_164183_480x0_resize_box_3.png 480w, https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image-2_hub0c6070855705d45c976ae295ac28637_164183_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="148"
+data-flex-basis="356px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>可以在浏览器的任务管理器中查看当前的所有进程&lt;/p>
+&lt;/blockquote>
+&lt;p>其中，最主要的进程有：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>浏览器进程&lt;/p>
+&lt;p>主要负责界面显示、用户交互、子进程管理等。浏览器进程内部会启动多个线程处理不同的任务。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>网络进程&lt;/p>
+&lt;p>负责加载网络资源。网络进程内部会启动多个线程来处理不同的网络任务。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>渲染进程&lt;/strong>（本节课重点讲解的进程）&lt;/p>
+&lt;p>渲染进程启动后，会开启一个&lt;strong>渲染主线程&lt;/strong>，主线程负责执行 HTML、CSS、JS 代码。&lt;/p>
+&lt;p>默认情况下，浏览器会为每个标签页开启一个新的渲染进程，以保证不同的标签页之间不相互影响。&lt;/p>
+&lt;blockquote>
+&lt;p>将来该默认模式可能会有所改变，有兴趣的同学可参见&lt;a class="link" href="https://chromium.googlesource.com/chromium/src/&amp;#43;/main/docs/process_model_and_site_isolation.md#Modes-and-Availability" target="_blank" rel="noopener"
+>chrome官方说明文档&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="渲染主线程是如何工作的">渲染主线程是如何工作的？&lt;/h2>
+&lt;p>渲染主线程是浏览器中最繁忙的线程，需要它处理的任务包括但不限于：&lt;/p>
+&lt;ul>
+&lt;li>解析 HTML&lt;/li>
+&lt;li>解析 CSS&lt;/li>
+&lt;li>计算样式&lt;/li>
+&lt;li>布局&lt;/li>
+&lt;li>处理图层&lt;/li>
+&lt;li>每秒把页面画 60 次&lt;/li>
+&lt;li>执行全局 JS 代码&lt;/li>
+&lt;li>执行事件处理函数&lt;/li>
+&lt;li>执行计时器的回调函数&lt;/li>
+&lt;li>&amp;hellip;&amp;hellip;&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>思考题：为什么渲染进程不适用多个线程来处理这些事情？&lt;/p>
+&lt;/blockquote>
+&lt;p>要处理这么多的任务，主线程遇到了一个前所未有的难题：如何调度任务？&lt;/p>
+&lt;p>比如：&lt;/p>
+&lt;ul>
+&lt;li>我正在执行一个 JS 函数，执行到一半的时候用户点击了按钮，我该立即去执行点击事件的处理函数吗？&lt;/li>
+&lt;li>我正在执行一个 JS 函数，执行到一半的时候某个计时器到达了时间，我该立即去执行它的回调吗？&lt;/li>
+&lt;li>浏览器进程通知我“用户点击了按钮”，与此同时，某个计时器也到达了时间，我应该处理哪一个呢？&lt;/li>
+&lt;li>&amp;hellip;&amp;hellip;&lt;/li>
+&lt;/ul>
+&lt;p>渲染主线程想出了一个绝妙的主意来处理这个问题：排队&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image-3.png"
+width="1570"
+height="886"
+srcset="https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image-3_hu88ac2f4a67f464d404836a760810aa11_88333_480x0_resize_box_3.png 480w, https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image-3_hu88ac2f4a67f464d404836a760810aa11_88333_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="425px"
+>&lt;/p>
+&lt;ol>
+&lt;li>在最开始的时候，渲染主线程会进入一个无限循环&lt;/li>
+&lt;li>每一次循环会检查消息队列中是否有任务存在。如果有，就取出第一个任务执行，执行完一个后进入下一次循环；如果没有，则进入休眠状态。&lt;/li>
+&lt;li>其他所有线程（包括其他进程的线程）可以随时向消息队列添加任务。新任务会加到消息队列的末尾。在添加新任务时，如果主线程是休眠状态，则会将其唤醒以继续循环拿取任务&lt;/li>
+&lt;/ol>
+&lt;p>这样一来，就可以让每个任务有条不紊的、持续的进行下去了。&lt;/p>
+&lt;p>&lt;strong>整个过程，被称之为事件循环（消息循环）&lt;/strong>&lt;/p>
+&lt;h2 id="若干解释">若干解释&lt;/h2>
+&lt;h3 id="何为异步">何为异步？&lt;/h3>
+&lt;p>代码在执行过程中，会遇到一些无法立即处理的任务，比如：&lt;/p>
+&lt;ul>
+&lt;li>计时完成后需要执行的任务 —— &lt;code>setTimeout&lt;/code>、&lt;code>setInterval&lt;/code>&lt;/li>
+&lt;li>网络通信完成后需要执行的任务 &amp;ndash; &lt;code>XHR&lt;/code>、&lt;code>Fetch&lt;/code>&lt;/li>
+&lt;li>用户操作后需要执行的任务 &amp;ndash; &lt;code>addEventListener&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>如果让渲染主线程等待这些任务的时机达到，就会导致主线程长期处于「阻塞」的状态，从而导致浏览器「卡死」&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image-4.png"
+width="1712"
+height="790"
+srcset="https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image-4_hu1c495e8d6084f38aa4d76a723c953303_102928_480x0_resize_box_3.png 480w, https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image-4_hu1c495e8d6084f38aa4d76a723c953303_102928_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="216"
+data-flex-basis="520px"
+>&lt;/p>
+&lt;p>&lt;strong>渲染主线程承担着极其重要的工作，无论如何都不能阻塞！&lt;/strong>&lt;/p>
+&lt;p>因此，浏览器选择&lt;strong>异步&lt;/strong>来解决这个问题&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image-5.png"
+width="1740"
+height="848"
+srcset="https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image-5_hu9a20091f3e13b28c2b6605c3dbb23198_113231_480x0_resize_box_3.png 480w, https://xph0816.github.io/zhcn/p/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/image-5_hu9a20091f3e13b28c2b6605c3dbb23198_113231_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="205"
+data-flex-basis="492px"
+>&lt;/p>
+&lt;p>使用异步的方式，&lt;strong>渲染主线程永不阻塞&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>面试题：如何理解 JS 的异步？&lt;/p>
+&lt;p>参考答案：&lt;/p>
+&lt;p>JS是一门单线程的语言，这是因为它运行在浏览器的渲染主线程中，而渲染主线程只有一个。&lt;/p>
+&lt;p>而渲染主线程承担着诸多的工作，渲染页面、执行 JS 都在其中运行。&lt;/p>
+&lt;p>如果使用同步的方式，就极有可能导致主线程产生阻塞，从而导致消息队列中的很多其他任务无法得到执行。这样一来，一方面会导致繁忙的主线程白白的消耗时间，另一方面导致页面无法及时更新，给用户造成卡死现象。&lt;/p>
+&lt;p>所以浏览器采用异步的方式来避免。具体做法是当某些任务发生时，比如计时器、网络、事件监听，主线程将任务交给其他线程去处理，自身立即结束任务的执行，转而执行后续代码。当其他线程完成时，将事先传递的回调函数包装成任务，加入到消息队列的末尾排队，等待主线程调度执行。&lt;/p>
+&lt;p>在这种异步模式下，浏览器永不阻塞，从而最大限度的保证了单线程的流畅运行。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="js为何会阻碍渲染">JS为何会阻碍渲染？&lt;/h3>
+&lt;p>先看代码&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Mr.Yuan is awesome!&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">button&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>change&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">button&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">h1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;h1&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">btn&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;button&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 死循环指定的时间
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">delay&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">duration&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">start&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nb">Date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nx">start&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">btn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">onclick&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">h1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;袁老师很帅！&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">delay&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>点击按钮后，会发生什么呢？&lt;/p>
+&lt;p>&amp;lt;见具体演示&amp;gt;&lt;/p>
+&lt;h3 id="任务有优先级吗">任务有优先级吗？&lt;/h3>
+&lt;p>任务没有优先级，在消息队列中先进先出&lt;/p>
+&lt;p>但&lt;strong>消息队列是有优先级的&lt;/strong>&lt;/p>
+&lt;p>根据 W3C 的最新解释:&lt;/p>
+&lt;ul>
+&lt;li>每个任务都有一个任务类型，同一个类型的任务必须在一个队列，不同类型的任务可以分属于不同的队列。
+在一次事件循环中，浏览器可以根据实际情况从不同的队列中取出任务执行。&lt;/li>
+&lt;li>浏览器必须准备好一个微队列，微队列中的任务优先所有其他任务执行
+&lt;a class="link" href="https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint" target="_blank" rel="noopener"
+>https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>随着浏览器的复杂度急剧提升，W3C 不再使用宏队列的说法&lt;/p>
+&lt;/blockquote>
+&lt;p>在目前 chrome 的实现中，至少包含了下面的队列：&lt;/p>
+&lt;ul>
+&lt;li>延时队列：用于存放计时器到达后的回调任务，优先级「中」&lt;/li>
+&lt;li>交互队列：用于存放用户操作后产生的事件处理任务，优先级「高」&lt;/li>
+&lt;li>微队列：用户存放需要最快执行的任务，优先级「最高」&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>添加任务到微队列的主要方式主要是使用 Promise、MutationObserver&lt;/p>
+&lt;p>例如：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 立即把一个函数添加到微队列
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nb">Promise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">resolve&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">函数&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>浏览器还有很多其他的队列，由于和我们开发关系不大，不作考虑&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>面试题：阐述一下 JS 的事件循环&lt;/p>
+&lt;p>参考答案：&lt;/p>
+&lt;p>事件循环又叫做消息循环，是浏览器渲染主线程的工作方式。&lt;/p>
+&lt;p>在 Chrome 的源码中，它开启一个不会结束的 for 循环，每次循环从消息队列中取出第一个任务执行，而其他线程只需要在合适的时候将任务加入到队列末尾即可。&lt;/p>
+&lt;p>过去把消息队列简单分为宏队列和微队列，这种说法目前已无法满足复杂的浏览器环境，取而代之的是一种更加灵活多变的处理方式。&lt;/p>
+&lt;p>根据 W3C 官方的解释，每个任务有不同的类型，同类型的任务必须在同一个队列，不同的任务可以属于不同的队列。不同任务队列有不同的优先级，在一次事件循环中，由浏览器自行决定取哪一个队列的任务。但浏览器必须有一个微队列，微队列的任务一定具有最高的优先级，必须优先调度执行。&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>面试题：JS 中的计时器能做到精确计时吗？为什么？&lt;/p>
+&lt;p>参考答案：&lt;/p>
+&lt;p>不行，因为：&lt;/p>
+&lt;ol>
+&lt;li>计算机硬件没有原子钟，无法做到精确计时&lt;/li>
+&lt;li>操作系统的计时函数本身就有少量偏差，由于 JS 的计时器最终调用的是操作系统的函数，也就携带了这些偏差&lt;/li>
+&lt;li>按照 W3C 的标准，浏览器实现计时器时，如果嵌套层级超过 5 层，则会带有 4 毫秒的最少时间，这样在计时时间少于 4 毫秒时又带来了偏差&lt;/li>
+&lt;li>受事件循环的影响，计时器的回调函数只能在主线程空闲时运行，因此又带来了偏差&lt;/li>
+&lt;/ol>
+&lt;/blockquote></description></item></channel></rss>
