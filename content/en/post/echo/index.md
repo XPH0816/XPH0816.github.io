@@ -6,12 +6,13 @@ date: 2025-03-30 00:00:00+0800
 image: featured-image-FTF-25.png
 categories:
     - CTF Writeup
-    - Synk Fetch the Flag 2025
-    - Binary Exploitation
+    - Synk Fetch the Flag
 tags:
     - CTF
     - Synk
     - Fetch the Flag 2025
+    - Binary Exploitation
+    - Buffer Overflow
 comments: false
 ---
 
