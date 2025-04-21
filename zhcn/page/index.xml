@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on Song's Blog</title><link>https://xph0816.github.io/zhcn/page/</link><description>Recent content in Pages on Song's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 06 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://xph0816.github.io/zhcn/page/index.xml" rel="self" type="application/rss+xml"/><item><title>归档</title><link>https://xph0816.github.io/zhcn/archives/</link><pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate><guid>https://xph0816.github.io/zhcn/archives/</guid><description/></item><item><title>搜索</title><link>https://xph0816.github.io/zhcn/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xph0816.github.io/zhcn/search/</guid><description/></item><item><title>项目</title><link>https://xph0816.github.io/zhcn/%E9%A1%B9%E7%9B%AE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://xph0816.github.io/zhcn/%E9%A1%B9%E7%9B%AE/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://github.com/XPH0816/webdav-deploy-action" target="_blank" rel="noopener"
+>GitHub Action 用于 WebDAV 部署&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://github.com/XPH0816/DSA-Project" target="_blank" rel="noopener"
+>音乐播放器 (CLI)&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://github.com/XPH0816/algo-presentation" target="_blank" rel="noopener"
+>算法演示幻灯片 (Slidev)&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://github.com/XPH0816/Library-management-system" target="_blank" rel="noopener"
+>图书馆管理系统&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://github.com/XPH0816/LibraryRoomBookingSystem" target="_blank" rel="noopener"
+>图书馆房间预订系统&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://github.com/XPH0816/railwayfeedbacksystem" target="_blank" rel="noopener"
+>捷运服务反馈系统&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://github.com/XPH0816/Creating-function-image-tools" target="_blank" rel="noopener"
+>制作函数图像工具&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a class="link" href="https://github.com/XPH0816?tab=repositories" target="_blank" rel="noopener"
+>更多项目请访问我的 GitHub 仓库&lt;/a>&lt;/p></description></item></channel></rss>

